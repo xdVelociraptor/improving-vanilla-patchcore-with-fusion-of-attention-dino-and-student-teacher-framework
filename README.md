@@ -1,4 +1,4 @@
-# Kutty Dinosaur
+# improving-vanilla-patchcore-with-fusion-of-attention-dino-and-student-teacher-framework
 
 Research code for image and pixel anomaly detection on the original MVTec AD and MVTec LOCO AD. The pipeline combines PatchCore, a local student–teacher, DINOv2 reconstruction, and composition evidence.
 
