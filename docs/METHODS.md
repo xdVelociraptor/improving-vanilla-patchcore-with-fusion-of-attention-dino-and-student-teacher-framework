@@ -23,13 +23,9 @@ pre-registered results.
 
 Windows 11, AMD Ryzen 9 8940HX (16 cores), 23 GB RAM, NVIDIA RTX 5070 Laptop GPU (8 GB, sm_120),
 Python 3.12.10, torch 2.11.0+cu128, faiss-cpu 1.15.1. `requirements.lock.txt` is the pinned
-`pip freeze` of the bundled `.venv`; `hybridad env` writes `docs/environment.json`.
+`pip freeze` of the original research archive's environment; `hybridad env` writes `docs/environment.json`.
 
-This package is self-contained: it bundles the Python environment (`.venv`), the pretrained weights (`weights/`), the
-MVTec AD and MVTec LOCO datasets (`data/`), the ImageNette penalty images (`external_data/`), and the trained models and
-score files behind every saved result (`work/`). All default paths in `configs/base.yaml` are relative to the package
-folder. Feature caches and LOCO TIFF maps are not bundled; they are rebuilt on demand under `work/`.
-`check_package.py` verifies all of this and reproduces the saved AUROCs from the bundled score files.
+The original archive included the Python environment, datasets, pretrained weights, trained models, and saved scores. This source repository does not include those large inputs. See `README.md` and `DATA_AND_LICENSES.md` for setup, download, and verification instructions. `check_package.py` requires the full original archive and its saved scores.
 
 ## 3. Sources, versions and provenance
 
