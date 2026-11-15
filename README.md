@@ -2,6 +2,7 @@
 
 Research code for image and pixel anomaly detection on the original MVTec AD and MVTec LOCO AD. The pipeline combines PatchCore, a local student–teacher, DINOv2 reconstruction, and composition evidence.
 
+- [Historical report PDF](docs/REPORT.pdf) (describes the original full archive; see this README for the source-only release)
 - [Methods and caveats](docs/METHODS.md)
 - [Historical AUROC results](docs/RESULTS.md) and [machine-readable summary tables](results/)
 - [X3 exploratory experiments](docs/X3.md)
