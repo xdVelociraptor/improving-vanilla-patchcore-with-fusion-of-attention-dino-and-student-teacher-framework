@@ -7,10 +7,10 @@ Research code for image and pixel anomaly detection on the original MVTec AD and
 - [Historical AUROC results](docs/RESULTS.md) and [machine-readable summary tables](results/)
 - [X3 exploratory experiments](docs/X3.md)
 - [Architecture diagrams](architecture.html)
-- [Interactive results viewer](visualiser.html), [pre-registration changelog](runs/PREREGISTRATION_CHANGELOG.md), and [142-entry test-access log excerpt](runs/TEST_ACCESS_LOG_excerpt.jsonl)
+- [Interactive results viewer](visualiser.html), [pre-registration changelog](runs/PREREGISTRATION_CHANGELOG.md), and [142-entry test-access log excerpt](docs/TEST_ACCESS_LOG_excerpt.jsonl)
 - [Model metadata and excluded artifacts](work/README.md)
 - [Dataset, model and code sources and terms](DATA_AND_LICENSES.md)
-- [Recorded experiment pre-registration](runs/PREREGISTRATION.json)
+- [Recorded experiment pre-registration](docs/PREREGISTRATION.json)
 - [Original Windows GPU environment (local paths removed)](docs/environment.json)
 
 ## Headline results (seed 0, image-level AUROC)
