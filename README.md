@@ -7,7 +7,7 @@ Research code for image and pixel anomaly detection on the original MVTec AD and
 - [Historical AUROC results](docs/RESULTS.md) and [machine-readable summary tables](results/)
 - [X3 exploratory experiments](docs/X3.md)
 - [Architecture diagrams](architecture.html)
-- [Interactive results viewer](visualiser.html) and [pre-registration changelog](runs/PREREGISTRATION_CHANGELOG.md)
+- [Interactive results viewer](visualiser.html), [pre-registration changelog](runs/PREREGISTRATION_CHANGELOG.md), and [142-entry test-access log excerpt](runs/TEST_ACCESS_LOG_excerpt.jsonl)
 - [Model metadata and excluded artifacts](work/README.md)
 - [Dataset, model and code sources and terms](DATA_AND_LICENSES.md)
 - [Recorded experiment pre-registration](runs/PREREGISTRATION.json)
@@ -76,7 +76,7 @@ For the original Python 3.12.10 and PyTorch CUDA 12.8 environment on Windows, ru
 
 The included split manifests give the exact image IDs, file digests and split roles used in the archive. The pipeline also checks the pretrained weight digests. Each new experiment writes to `runs_rerun/` and uses `work/` for large artifacts. Without archived scores and checkpoints, this workflow scores and trains from scratch. The local student–teacher penalty step needs Imagenette unless using the explicit no-penalty configuration.
 
-The historical confirmatory figures were produced by the preregistered code. This source release is the later AUROC-only derivative. New runs are exploratory and will not re-create the original preregistration or produce a new confirmation; see [the original evaluation history](docs/RESULTS.md). The historical aggregate results in this snapshot are sufficient to inspect previously reported metrics; the original saved scores, preregistration, and audit logs remain in the local archive. `check.cmd`, report generation, and the saved-score reproduction path require that fuller archive.
+The historical confirmatory figures were produced by the preregistered code. This source release is the later AUROC-only derivative. New runs are exploratory and will not re-create the original preregistration or produce a new confirmation; see [the original evaluation history](docs/RESULTS.md). The historical aggregate results in this snapshot are sufficient to inspect previously reported metrics. This repository includes the normalized pre-registration record and the 142-entry test-access excerpt; full saved scores and complete audit logs remain in the local archive. `check.cmd`, report generation, and the saved-score reproduction path require that fuller archive.
 
 For X3, run `python scripts/x3_run.py prepare` and then `python scripts/x3_run.py evaluate` after placing the MVTec LOCO inputs and the required weights. X3 was designed after looking at LOCO test results and is always exploratory.
 
