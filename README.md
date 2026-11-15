@@ -21,6 +21,20 @@ Research code for image and pixel anomaly detection on the original MVTec AD and
 
 For historical localization, per-category AUROC and confidence intervals, see [the results](docs/RESULTS.md).
 
+## One-command setup on the original Windows PC
+
+If your complete original project folder is still at `%USERPROFILE%\OneDrive\Desktop\kutty dinosaur`, download and extract this repository into a **separate** folder, then double-click `setup_local_archive.cmd`. The setup copies the original datasets, weights, trained models, score files, saved results, and Python environment into the checkout without modifying the original. It then runs the quick self-check. The original folder must have a working Python 3.12 environment and the files listed above. Allow roughly 27 GB plus 2 GB spare disk space and time for the copy.
+
+If the archive is in a different folder, run this in PowerShell from the checkout:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\setup_local_archive.ps1 -Archive "C:\path\to\original project"
+```
+
+Setup stops rather than overwriting a different existing file. If a previous quick check has left `runs_check/` or `logs/self_check.json`, preserve or move those items before rerunning setup. After it passes, run `.\hybridad.cmd --help` and use `hybridad.cmd` / `x3.cmd` as shown in the experiment guide. These wrappers select this checkout's source. On this original machine, the quick check verified weights, datasets, scores, and sample AUROC reproductions.
+
+This convenience setup uses files already present on the original Windows PC; GitHub does not contain the datasets, trained checkpoints, scores, or Python environment. To use the repository on a different machine without the archive, follow the manual installation and publisher download guide below, and retrain or restore your artifacts separately. The historical full-archive check is not expected to pass without those saved artifacts.
+
 ## Install and check the code
 
 Use Python 3.12. For a CPU or platform-default setup, create and activate a virtual environment, then install the package and test dependencies:
