@@ -1,0 +1,8 @@
+extends:
+- ../base.yaml
+experiment:
+  name: B_local_st
+  description: Local student-teacher alone
+  branches:
+    local_st: branches/local_st_ref.yaml
+  fusion: max

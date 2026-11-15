@@ -1,0 +1,18 @@
+{
+  "calibration_reuse": true,
+  "category": "toothbrush",
+  "counts": {
+    "calib_shared": 12,
+    "fit": 48,
+    "test": 42
+  },
+  "dataset": "mvtec_ad",
+  "duplicate_groups": [],
+  "manifest_sha256": "84a2e7ad3190647955964f234cdade6643fe5ee09114540fd11e85c72cbeeba6",
+  "protocol": {
+    "ad_calibration_fraction": 0.2,
+    "ad_calibration_min": 10,
+    "separate_scale_threshold_min": 40,
+    "split_salt": "hybridad-split-v1"
+  }
+}

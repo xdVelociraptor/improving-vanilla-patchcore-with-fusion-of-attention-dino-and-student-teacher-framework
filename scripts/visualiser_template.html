@@ -1,0 +1,624 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kutty Dinosaur results</title>
+<style>
+:root{color-scheme:light;
+  --page:#f9f9f7;--surface:#fcfcfb;--ink:#0b0b0b;--ink2:#52514e;--muted:#898781;--grid:#e1e0d9;--axis:#c3c2b7;
+  --border:rgba(11,11,11,.10);--hover:rgba(11,11,11,.05);
+  --s1:#2a78d6;--s2:#eb6834;--s3:#1baf7a;--s4:#eda100;--s5:#e87ba4;--neg:#e34948;
+  --q0:#cde2fb;--q1:#9ec5f4;--q2:#6da7ec;--q3:#3987e5;--q4:#256abf;--q5:#184f95;--q6:#0d366b;
+  --accent:#2a78d6;--accent-wash:rgba(42,120,214,.10);--frozen-fill:#f0efec}
+@media (prefers-color-scheme:dark){:root:where(:not([data-theme="light"])){color-scheme:dark;
+  --page:#0d0d0d;--surface:#1a1a19;--ink:#ffffff;--ink2:#c3c2b7;--muted:#898781;--grid:#2c2c2a;--axis:#383835;
+  --border:rgba(255,255,255,.10);--hover:rgba(255,255,255,.06);
+  --s1:#3987e5;--s2:#d95926;--s3:#199e70;--s4:#c98500;--s5:#d55181;--neg:#e66767;
+  --q0:#0d366b;--q1:#184f95;--q2:#256abf;--q3:#3987e5;--q4:#6da7ec;--q5:#9ec5f4;--q6:#cde2fb;
+  --accent:#3987e5;--accent-wash:rgba(57,135,229,.16);--frozen-fill:#262624}}
+:root[data-theme="dark"]{color-scheme:dark;
+  --page:#0d0d0d;--surface:#1a1a19;--ink:#ffffff;--ink2:#c3c2b7;--muted:#898781;--grid:#2c2c2a;--axis:#383835;
+  --border:rgba(255,255,255,.10);--hover:rgba(255,255,255,.06);
+  --s1:#3987e5;--s2:#d95926;--s3:#199e70;--s4:#c98500;--s5:#d55181;--neg:#e66767;
+  --q0:#0d366b;--q1:#184f95;--q2:#256abf;--q3:#3987e5;--q4:#6da7ec;--q5:#9ec5f4;--q6:#cde2fb;
+  --accent:#3987e5;--accent-wash:rgba(57,135,229,.16);--frozen-fill:#262624}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--page);color:var(--ink);font:14px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+.page{max-width:1320px;margin:0 auto;padding:20px 16px 48px}
+.top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
+h1{font-size:24px;margin:0 0 4px;font-weight:650}
+h2{font-size:17px;margin:28px 0 10px;font-weight:650}
+h3{font-size:14.5px;margin:18px 0 8px;font-weight:650}
+.sub{margin:0;color:var(--ink2);max-width:880px}
+.foot{color:var(--muted);font-size:12.5px;margin-top:32px}
+button{font:inherit;color:inherit}
+.toggle{border:1px solid var(--border);background:var(--surface);border-radius:8px;padding:6px 12px;cursor:pointer}
+nav.tabs{display:flex;gap:4px;flex-wrap:wrap;margin:18px 0 6px;border-bottom:1px solid var(--grid)}
+nav.tabs button{border:0;background:none;padding:9px 12px;cursor:pointer;color:var(--ink2);border-bottom:2px solid transparent;margin-bottom:-1px}
+nav.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent);font-weight:600}
+section[role="tabpanel"]{display:none}section.active{display:block}
+.filters{display:flex;gap:16px;flex-wrap:wrap;align-items:flex-end;margin:16px 0 8px}
+.filters label{display:flex;flex-direction:column;gap:4px;font-size:12.5px;color:var(--ink2)}
+select{font:inherit;padding:6px 8px;border-radius:8px;border:1px solid var(--border);background:var(--surface);color:var(--ink);min-width:160px}
+.seg{display:inline-flex;border:1px solid var(--border);border-radius:8px;overflow:hidden;background:var(--surface)}
+.seg button{border:0;background:none;padding:6px 12px;cursor:pointer;color:var(--ink2)}
+.seg button[aria-pressed="true"]{background:var(--accent-wash);color:var(--ink);font-weight:600}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px;margin:12px 0}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin:12px 0}
+.tile{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px 16px}
+.tile .lab{font-size:12.5px;color:var(--ink2);hyphens:none}
+.tile .lab .nb{white-space:nowrap}
+.tile .val{font-size:32px;font-weight:650;margin:2px 0}
+.tile .note{font-size:12.5px;color:var(--muted)}
+.tag{display:inline-block;font-size:11px;letter-spacing:.04em;border:1px solid var(--ink2);color:var(--ink2);border-radius:4px;padding:0 5px;margin-left:6px;vertical-align:1px}
+.note-box{border-left:3px solid var(--axis);padding:6px 12px;color:var(--ink2);margin:10px 0;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:13px}
+th,td{padding:6px 8px;border-bottom:1px solid var(--grid);text-align:right;white-space:nowrap}
+th:first-child,td:first-child,th.l,td.l{text-align:left}
+th{color:var(--ink2);font-weight:600;cursor:default;user-select:none}
+th.sort{cursor:pointer}th.sort:hover{color:var(--ink)}
+td{font-variant-numeric:tabular-nums}
+tbody tr:hover{background:var(--hover)}
+.scroll{overflow-x:auto}
+.bar{display:inline-block;height:8px;border-radius:0 4px 4px 0;background:var(--s1);vertical-align:middle;margin-right:6px}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:12.5px;color:var(--ink2);margin:4px 0 6px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.key-line{display:inline-block;width:16px;height:2px;border-radius:2px}
+.key-dot{display:inline-block;width:9px;height:9px;border-radius:50%}
+.chart svg{display:block;width:100%;height:auto;overflow:visible}
+.chart text{font-size:11.5px;fill:var(--ink2);font-family:inherit}
+.chart .axis line,.chart .axis path{stroke:var(--axis)}
+.chart .grid line{stroke:var(--grid)}
+.tip{position:fixed;pointer-events:none;z-index:10;background:var(--surface);color:var(--ink);border:1px solid var(--border);
+  border-radius:8px;padding:8px 10px;font-size:12.5px;box-shadow:0 6px 24px rgba(0,0,0,.14);display:none;max-width:320px}
+.tip .t{color:var(--ink2);margin-bottom:4px}
+.tip .r{display:flex;align-items:center;gap:8px;justify-content:space-between}
+.tip .r b{font-variant-numeric:tabular-nums}
+.tip .k{display:inline-flex;align-items:center;gap:6px;color:var(--ink2)}
+.small{font-size:12.5px;color:var(--ink2)}
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
+.three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+@media (max-width:860px){.two,.three{grid-template-columns:1fr}}
+.linkbtn{border:0;background:none;color:var(--accent);cursor:pointer;padding:0;font-size:12.5px}
+.arch-fig{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:12px 16px 14px;margin:14px 0}
+.arch-fig h3{margin:4px 0 8px}
+.arch-fig figcaption{color:var(--ink2);font-size:13px;margin-top:8px;max-width:980px}
+.steps li{margin:4px 0}
+/*__ARCH_CSS__*/
+</style>
+</head>
+<!--__ARCH_PAGE_SPLIT__-->
+<body>
+<main class="page">
+  <header class="top">
+    <div>
+      <h1>Kutty Dinosaur results explorer</h1>
+      <p class="sub">Image-level anomaly detection on MVTec AD and MVTec LOCO AD with four complementary scores
+        (PatchCore, local student–teacher, DINOv2 reconstruction, composition). Every number here is read from the
+        saved results in <code>runs/</code>; all metrics are AUROC-based.</p>
+    </div>
+    <button class="toggle" id="theme" type="button" aria-label="Toggle light or dark theme">Theme: system</button>
+  </header>
+  <nav class="tabs" role="tablist" aria-label="Sections">
+    <button role="tab" data-tab="overview">Overview</button>
+    <button role="tab" data-tab="experiments">Experiments</button>
+    <button role="tab" data-tab="categories">Per category</button>
+    <button role="tab" data-tab="loc">Localization</button>
+    <button role="tab" data-tab="x3">X3 (exploratory)</button>
+    <button role="tab" data-tab="arch">Architecture</button>
+    <button role="tab" data-tab="about">About the data</button>
+  </nav>
+
+  <section role="tabpanel" id="tab-overview">
+    <div class="tiles" id="tiles"></div>
+    <div class="card">
+      <h3 style="margin-top:0">What each score adds: macro image AUROC of the pre-registered experiments</h3>
+      <div class="legend" id="ov-legend"></div>
+      <div class="chart" id="ov-chart"></div>
+      <button class="linkbtn" data-table="ov">Show as table</button><div id="ov-table"></div>
+    </div>
+    <div class="note-box">The full model (G_full, maximum fusion) is the pre-registered headline. Experiments A–F and H use
+      subsets of its four scores; mean and OR are alternative fusion rules. X3 is exploratory: it was designed after the LOCO
+      test results had been seen.</div>
+  </section>
+
+  <section role="tabpanel" id="tab-experiments">
+    <div class="filters"><div><div class="small">Dataset</div><div class="seg" data-ds-control></div></div></div>
+    <div class="card scroll"><div id="exp-table"></div></div>
+    <div id="exp-partial"></div>
+  </section>
+
+  <section role="tabpanel" id="tab-categories">
+    <div class="filters">
+      <div><div class="small">Dataset</div><div class="seg" data-ds-control></div></div>
+      <label>Metric<select id="cat-metric"></select></label>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0">AUROC by experiment and category</h3>
+      <p class="small" style="margin:0 0 8px">Colour follows the AUROC scale under the map. Hover a cell for its value and 95% confidence interval.</p>
+      <div class="chart scroll" id="heat"></div>
+      <button class="linkbtn" data-table="heat">Show as table</button><div id="heat-table" class="scroll"></div>
+    </div>
+    <div class="card">
+      <div class="filters" style="margin-top:0">
+        <label>Compare<select id="cmp-a"></select></label><label>with<select id="cmp-b"></select></label>
+      </div>
+      <div class="legend" id="cmp-legend"></div>
+      <div class="chart" id="cmp-chart"></div>
+      <p class="small">Dots: AUROC; whiskers: stratified bootstrap 95% confidence interval (image AUROC only).</p>
+      <button class="linkbtn" data-table="cmp">Show as table</button><div id="cmp-table"></div>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0">Each branch's own AUROC per category</h3>
+      <div class="filters" style="margin-top:0">
+        <label>Experiment<select id="br-exp"></select></label>
+        <label id="br-sub-wrap">Anomalies<select id="br-sub"><option value="all">all</option><option value="logical">logical only</option><option value="structural">structural only</option></select></label>
+      </div>
+      <p class="small" style="margin:0 0 8px">"fused" is the experiment's combined score; the other columns are each branch's raw score on its own. Hover a cell for its value.</p>
+      <div class="chart scroll" id="br-heat"></div>
+      <button class="linkbtn" data-table="br">Show as table</button><div id="br-table" class="scroll"></div>
+    </div>
+  </section>
+
+  <section role="tabpanel" id="tab-loc">
+    <div class="filters">
+      <div><div class="small">Dataset</div><div class="seg" data-ds-control></div></div>
+      <label id="loc-sub-wrap">AU-sPRO subset<select id="loc-sub"><option value="mean">mean of logical and structural</option><option value="logical">logical</option><option value="structural">structural</option></select></label>
+    </div>
+    <div class="card"><div id="loc-body"></div></div>
+    <div class="note-box" id="loc-note"></div>
+  </section>
+
+  <section role="tabpanel" id="tab-x3">
+    <div class="note-box"><b>Exploratory.</b> X3 was specified and built after the confirmatory LOCO results had been seen, so
+      its numbers are optimistically biased and cannot be confirmed without new labelled data. It adds a 512-pixel PatchCore
+      and replaces composition with an 896-pixel version that uses part counts where they are stable on normal images.</div>
+    <div class="card scroll"><div id="x3-table"></div></div>
+    <div class="card">
+      <h3 style="margin-top:0">Change in AUROC per category: X3_mean minus G_full</h3>
+      <div class="legend"><span><i class="key-dot" style="background:var(--s1)"></i>higher with X3</span><span><i class="key-dot" style="background:var(--neg)"></i>lower with X3</span></div>
+      <div class="three" id="x3-delta"></div>
+      <button class="linkbtn" data-table="x3d">Show as table</button><div id="x3d-table"></div>
+    </div>
+  </section>
+
+  <section role="tabpanel" id="tab-arch">
+    <p class="sub" style="margin-top:14px">Read each diagram left to right. The same figures are on their own page in
+      <code>architecture.html</code>.</p>
+    <!--__ARCH_FIGURES__-->
+    <div class="card">
+      <h3 style="margin-top:0">In words</h3>
+      <ol class="steps">
+        <li><b>Preprocess</b> each image the way its branch needs (crop, resize or letterbox; the scene is never cropped on LOCO).</li>
+        <li><b>Extract features</b> with frozen pretrained networks (WideResNet-50-2, PDN-S teacher, DINOv2). They are never updated.</li>
+        <li><b>Compare with normal</b>: each branch has learned what normal looks like from normal images of the category only
+          (a patch memory, a student network, a reconstruction decoder, a memory of normal part arrangements).</li>
+        <li><b>Score</b>: the mismatch becomes an anomaly map and one image score per branch.</li>
+        <li><b>Normalize</b> each branch score with held-out normal images, so the four scales are comparable.</li>
+        <li><b>Fuse</b>: the full model takes the maximum, so one branch with strong evidence is enough.</li>
+        <li><b>Evaluate</b>: labels are used only here, to compute image AUROC (and, from the maps, the localization metrics).</li>
+      </ol>
+    </div>
+  </section>
+
+  <section role="tabpanel" id="tab-about">
+    <div class="card" id="about"></div>
+  </section>
+
+  <p class="foot">Generated __GENERATED__ by scripts/build_visualiser.py from runs/. Regenerate after any change to the
+    saved results.</p>
+</main>
+<script>
+"use strict";
+const DATA = /*__DATA__*/null;
+const BR = {patchcore: "PatchCore", local_st: "local ST", global_attention: "DINO", composition: "composition"};
+const SLOT = {fused: "--s1", patchcore: "--s2", local_st: "--s3", global_attention: "--s4", composition: "--s5"};
+const NS = "http://www.w3.org/2000/svg";
+const f3 = v => (v === null || v === undefined || Number.isNaN(v)) ? "–" : v.toFixed(3);
+const pretty = c => c.replace(/_/g, " ");
+const store = {get(k, d) { try { return localStorage.getItem("kd." + k) ?? d; } catch (e) { return d; } },
+               set(k, v) { try { localStorage.setItem("kd." + k, v); } catch (e) { /* storage unavailable */ } }};
+const state = {ds: store.get("ds", "mvtec_ad"), tab: store.get("tab", "overview")};
+
+function el(tag, attrs = {}, ...kids) {
+  const e = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs)) {
+    if (k === "class") e.className = v; else if (k.startsWith("on")) e.addEventListener(k.slice(2), v);
+    else if (k === "style") e.setAttribute("style", v); else if (v !== null && v !== undefined) e.setAttribute(k, v);
+  }
+  for (const c of kids) if (c !== null && c !== undefined) e.append(c instanceof Node ? c : document.createTextNode(String(c)));
+  return e;
+}
+function sv(tag, attrs = {}, text) {
+  const e = document.createElementNS(NS, tag);
+  for (const [k, v] of Object.entries(attrs)) if (v !== null && v !== undefined) e.setAttribute(k, v);
+  if (text !== undefined) e.textContent = text;
+  return e;
+}
+const cssVar = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+
+// ------------------------------------------------------------------ tooltip (textContent only)
+const tip = el("div", {class: "tip", role: "tooltip"}); document.body.append(tip);
+function showTip(evt, title, rows) {
+  tip.replaceChildren(el("div", {class: "t"}, title));
+  for (const r of rows) {
+    const key = el("span", {class: "k"});
+    if (r.color) key.append(el("i", {class: r.dot ? "key-dot" : "key-line", style: `background:${r.color}`}));
+    key.append(document.createTextNode(r.label));
+    tip.append(el("div", {class: "r"}, key, el("b", {}, r.value)));
+  }
+  tip.style.display = "block";
+  const x = evt.clientX ?? (evt.target.getBoundingClientRect().right), y = evt.clientY ?? evt.target.getBoundingClientRect().top;
+  const w = tip.offsetWidth, h = tip.offsetHeight;
+  tip.style.left = Math.min(window.innerWidth - w - 8, x + 14) + "px";
+  tip.style.top = Math.max(8, Math.min(window.innerHeight - h - 8, y + 14)) + "px";
+}
+const hideTip = () => { tip.style.display = "none"; };
+
+// ------------------------------------------------------------------ helpers
+const D = () => DATA.datasets[state.ds];
+const expById = (ds, id) => DATA.datasets[ds].experiments.find(e => e.id === id);
+const completeExps = ds => DATA.datasets[ds].experiments.filter(e => !e.partial);
+function statusTag(e) { return e.status === "EXPLORATORY" ? el("span", {class: "tag"}, "EXPLORATORY") : null; }
+function tableToggle(btnKey, build) {
+  const btn = document.querySelector(`[data-table="${btnKey}"]`), box = document.getElementById(btnKey + "-table");
+  btn.onclick = () => { const open = box.childElementCount > 0; box.replaceChildren(); btn.textContent = open ? "Show as table" : "Hide table"; if (!open) box.append(build()); };
+  if (box.childElementCount) box.replaceChildren(build());
+}
+function simpleTable(head, rows, leftCols = 1) {
+  const t = el("table");
+  t.append(el("thead", {}, el("tr", {}, ...head.map((h, i) => el("th", {class: i < leftCols ? "l" : ""}, h)))));
+  const b = el("tbody");
+  for (const r of rows) b.append(el("tr", {}, ...r.map((c, i) => el("td", {class: i < leftCols ? "l" : ""}, c))));
+  t.append(b); return t;
+}
+function niceDomain(vals, floor = 0.5) {
+  const v = vals.filter(x => x !== null && x !== undefined);
+  let lo = Math.min(...v), hi = 1;
+  lo = Math.max(floor, Math.floor((lo - 0.01) * 20) / 20);
+  return [lo, hi];
+}
+function ticks(lo, hi) {
+  const span = hi - lo, step = span > 0.4 ? 0.1 : span > 0.2 ? 0.05 : 0.025;
+  const out = []; for (let v = Math.ceil(lo / step - 1e-9) * step; v <= hi + 1e-9; v += step) out.push(+v.toFixed(3)); return out;
+}
+
+// ------------------------------------------------------------------ dot plot (rows x one value axis)
+function dotPlot(host, rows, series, {domain, legendHost, ci = true}) {
+  const W = 900, rowH = 26, left = 170, right = 24, top = 26, H = top + rows.length * rowH + 30;
+  const [lo, hi] = domain, X = v => left + (v - lo) / (hi - lo) * (W - left - right);
+  const svg = sv("svg", {viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": "Dot plot"});
+  const g = sv("g", {class: "grid"});
+  for (const t of ticks(lo, hi)) {
+    g.append(sv("line", {x1: X(t), x2: X(t), y1: top - 6, y2: H - 26}));
+    svg.append(sv("text", {x: X(t), y: H - 10, "text-anchor": "middle"}, t.toFixed(t * 100 % 5 ? 3 : 2)));
+  }
+  svg.prepend(g);
+  rows.forEach((r, i) => {
+    const y = top + i * rowH + rowH / 2;
+    svg.append(sv("text", {x: left - 10, y: y + 4, "text-anchor": "end"}, r.label));
+    const off = series.length > 1 ? (s => (s - (series.length - 1) / 2) * 6) : (() => 0);
+    series.forEach((s, si) => {
+      const v = s.values[r.key]; if (!v || v.v === null || v.v === undefined) return;
+      const yy = y + off(si), col = `var(${s.color})`;
+      if (ci && v.lo !== null && v.lo !== undefined) svg.append(sv("line", {x1: X(Math.max(lo, v.lo)), x2: X(v.hi), y1: yy, y2: yy, stroke: col, "stroke-width": 1.5, "stroke-linecap": "round"}));
+      svg.append(sv("circle", {cx: X(Math.max(lo, v.v)), cy: yy, r: 4.5, fill: col, stroke: "var(--surface)", "stroke-width": 2}));
+    });
+    const hit = sv("rect", {x: 0, y: y - rowH / 2, width: W, height: rowH, fill: "transparent", tabindex: 0});
+    const rowsFor = () => series.map(s => { const v = s.values[r.key]; return {color: `var(${s.color})`, dot: true, label: s.name,
+      value: v && v.v !== null && v.v !== undefined ? f3(v.v) + (ci && v.lo != null ? `  [${f3(v.lo)}, ${f3(v.hi)}]` : "") : "–"}; });
+    hit.addEventListener("pointermove", e => showTip(e, r.label, rowsFor())); hit.addEventListener("pointerleave", hideTip);
+    hit.addEventListener("focus", e => showTip(e, r.label, rowsFor())); hit.addEventListener("blur", hideTip);
+    svg.append(hit);
+  });
+  host.replaceChildren(svg);
+  if (legendHost) legendHost.replaceChildren(...(series.length > 1 ? series.map(s => el("span", {}, el("i", {class: "key-dot", style: `background:var(${s.color})`}), s.name)) : []));
+}
+
+// ------------------------------------------------------------------ heatmap (sequential, one hue)
+function seqColor(v, lo, hi) {
+  const stops = [0, 1, 2, 3, 4, 5, 6].map(i => cssVar(`--q${i}`));
+  const t = Math.max(0, Math.min(1, (v - lo) / (hi - lo))) * 6, i = Math.min(5, Math.floor(t)), f = t - i;
+  const p = h => [1, 3, 5].map(k => parseInt(h.slice(k, k + 2), 16));
+  const a = p(stops[i]), b = p(stops[i + 1]), c = a.map((x, k) => Math.round(x + (b[k] - x) * f));
+  return {fill: `rgb(${c.join(",")})`, light: (0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2]) / 255 > 0.55};
+}
+function heatmap(host, rowsL, cols, get, {lo, hi, caption}) {
+  const cw = Math.max(46, Math.min(70, 760 / cols.length)), ch = 24, left = 190, top = 92;
+  const W = left + cols.length * cw + 10, H = top + rowsL.length * ch + 48;
+  const svg = sv("svg", {viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": caption, style: `width:${W}px;max-width:100%`});
+  cols.forEach((c, j) => { const t = sv("text", {transform: `translate(${left + j * cw + cw / 2},${top - 8}) rotate(-40)`, "text-anchor": "start"}, c.label); svg.append(t); });
+  rowsL.forEach((r, i) => {
+    svg.append(sv("text", {x: left - 10, y: top + i * ch + ch / 2 + 4, "text-anchor": "end"}, r.label));
+    cols.forEach((c, j) => {
+      const v = get(r, c); const x = left + j * cw, y = top + i * ch;
+      if (!v || v.v === null || v.v === undefined) { svg.append(sv("rect", {x: x + 1, y: y + 1, width: cw - 2, height: ch - 2, rx: 3, fill: "var(--hover)"})); return; }
+      const col = seqColor(v.v, lo, hi);
+      const cell = sv("rect", {x: x + 1, y: y + 1, width: cw - 2, height: ch - 2, rx: 3, fill: col.fill, tabindex: 0});
+      const rowsT = [{label: "AUROC", value: f3(v.v)}].concat(v.lo != null ? [{label: "95% CI", value: `${f3(v.lo)} – ${f3(v.hi)}`}] : []);
+      const title = `${r.label} · ${c.label}`;
+      cell.addEventListener("pointermove", e => { cell.setAttribute("stroke", "var(--ink)"); showTip(e, title, rowsT); });
+      cell.addEventListener("pointerleave", () => { cell.removeAttribute("stroke"); hideTip(); });
+      cell.addEventListener("focus", e => showTip(e, title, rowsT)); cell.addEventListener("blur", hideTip);
+      svg.append(cell);
+    });
+  });
+  const ly = top + rowsL.length * ch + 18, lw = 220, steps = 40;
+  for (let k = 0; k < steps; k++) svg.append(sv("rect", {x: left + k * lw / steps, y: ly, width: lw / steps + 0.5, height: 8, fill: seqColor(lo + (hi - lo) * k / (steps - 1), lo, hi).fill}));
+  svg.append(sv("text", {x: left, y: ly + 22, "text-anchor": "start"}, f3(lo).replace(/0+$/, "").replace(/\.$/, ".0") + (lo > 0.5 ? " or lower" : "")));
+  svg.append(sv("text", {x: left + lw, y: ly + 22, "text-anchor": "end"}, "1.0"));
+  svg.append(sv("text", {x: left + lw + 12, y: ly + 8, "text-anchor": "start"}, "AUROC"));
+  host.replaceChildren(svg);
+}
+
+// ------------------------------------------------------------------ line chart with crosshair
+function interp(xs, ys, x) {
+  if (x <= xs[0]) return ys[0];
+  for (let i = 1; i < xs.length; i++) if (xs[i] >= x) { const t = xs[i] === xs[i - 1] ? 1 : (x - xs[i - 1]) / (xs[i] - xs[i - 1]); return ys[i - 1] + t * (ys[i] - ys[i - 1]); }
+  return ys[ys.length - 1];
+}
+function lineChart(host, series, {xDomain = [0, 1], yDomain = [0, 1], xLabel, yLabel, logX = false, snap = null, square = true, title}) {
+  const W = square ? 520 : 860, H = square ? 500 : 340, L = 52, R = 16, T = 12, B = 44;
+  const lx = v => logX ? Math.log10(v) : v, [x0, x1] = xDomain.map(lx);
+  const X = v => L + (lx(v) - x0) / (x1 - x0) * (W - L - R), Y = v => T + (1 - (v - yDomain[0]) / (yDomain[1] - yDomain[0])) * (H - T - B);
+  const svg = sv("svg", {viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": title || "Line chart"});
+  const g = sv("g", {class: "grid"});
+  const xt = logX ? (snap || [0.01, 0.1, 1]) : [0, 0.2, 0.4, 0.6, 0.8, 1], yt = ticks(yDomain[0], yDomain[1]).filter((_, i, a) => a.length < 8 || i % 2 === 0);
+  for (const t of xt) { g.append(sv("line", {x1: X(t), x2: X(t), y1: T, y2: H - B})); svg.append(sv("text", {x: X(t), y: H - B + 16, "text-anchor": "middle"}, String(t))); }
+  for (const t of yt) { g.append(sv("line", {x1: L, x2: W - R, y1: Y(t), y2: Y(t)})); svg.append(sv("text", {x: L - 8, y: Y(t) + 4, "text-anchor": "end"}, t.toFixed(t * 10 % 1 ? 2 : 1))); }
+  svg.append(g);
+  svg.append(sv("text", {x: (L + W - R) / 2, y: H - 6, "text-anchor": "middle"}, xLabel));
+  svg.append(sv("text", {x: 14, y: (T + H - B) / 2, "text-anchor": "middle", transform: `rotate(-90 14 ${(T + H - B) / 2})`}, yLabel));
+  for (const s of series) {
+    const pts = s.x.map((x, i) => `${X(Math.max(xDomain[0], x)).toFixed(1)},${Y(s.y[i]).toFixed(1)}`).join(" ");
+    svg.append(sv("polyline", {points: pts, fill: "none", stroke: `var(${s.color})`, "stroke-width": s.width || 2, "stroke-linejoin": "round", "stroke-linecap": "round"}));
+    if (s.markers) s.x.forEach((x, i) => svg.append(sv("circle", {cx: X(x), cy: Y(s.y[i]), r: 4, fill: `var(${s.color})`, stroke: "var(--surface)", "stroke-width": 2})));
+  }
+  const cross = sv("line", {y1: T, y2: H - B, stroke: "var(--muted)", "stroke-width": 1, visibility: "hidden"}); svg.append(cross);
+  const hit = sv("rect", {x: L, y: T, width: W - L - R, height: H - T - B, fill: "transparent"});
+  hit.addEventListener("pointermove", e => {
+    const r = svg.getBoundingClientRect(), px = (e.clientX - r.left) / r.width * W;
+    let xv = logX ? 10 ** (x0 + (px - L) / (W - L - R) * (x1 - x0)) : (px - L) / (W - L - R) * (xDomain[1] - xDomain[0]) + xDomain[0];
+    if (snap) xv = snap.reduce((a, b) => Math.abs(lx(b) - lx(xv)) < Math.abs(lx(a) - lx(xv)) ? b : a);
+    xv = Math.max(xDomain[0], Math.min(xDomain[1], xv));
+    cross.setAttribute("x1", X(xv)); cross.setAttribute("x2", X(xv)); cross.setAttribute("visibility", "visible");
+    showTip(e, `${xLabel} ${snap ? xv : xv.toFixed(3)}`, series.map(s => ({color: `var(${s.color})`, label: s.name, value: f3(interp(s.x, s.y, xv))})));
+  });
+  hit.addEventListener("pointerleave", () => { cross.setAttribute("visibility", "hidden"); hideTip(); });
+  svg.append(hit);
+  host.replaceChildren(svg);
+}
+
+// ------------------------------------------------------------------ diverging bars (delta)
+function deltaBars(host, rows, title, dom) {
+  const W = 420, rowH = 28, left = 140, top = 28, H = top + rows.length * rowH + 26, mid = left + (W - left - 50) / 2;
+  const X = v => mid + v / dom * ((W - left - 50) / 2);
+  const svg = sv("svg", {viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": title, style: `width:${W}px;max-width:100%`});
+  svg.append(sv("text", {x: left, y: 14, "font-weight": 600, fill: "var(--ink)"}, title));
+  svg.append(sv("line", {x1: mid, x2: mid, y1: top - 4, y2: H - 20, stroke: "var(--axis)"}));
+  for (const t of [-dom, 0, dom]) svg.append(sv("text", {x: X(t), y: H - 6, "text-anchor": "middle"}, (t > 0 ? "+" : "") + t.toFixed(2)));
+  rows.forEach((r, i) => {
+    const y = top + i * rowH + rowH / 2;
+    svg.append(sv("text", {x: left - 8, y: y + 4, "text-anchor": "end"}, r.label));
+    if (r.v === null || r.v === undefined) return;
+    const x = X(Math.max(-dom, Math.min(dom, r.v))), w = Math.abs(x - mid), pos = r.v >= 0;
+    const rad = Math.min(4, w), x0 = pos ? mid : x;
+    const d = pos ? `M${mid},${y - 6} H${x - rad} Q${x},${y - 6} ${x},${y - 6 + rad} V${y + 6 - rad} Q${x},${y + 6} ${x - rad},${y + 6} H${mid} Z`
+                  : `M${mid},${y - 6} H${x + rad} Q${x},${y - 6} ${x},${y - 6 + rad} V${y + 6 - rad} Q${x},${y + 6} ${x + rad},${y + 6} H${mid} Z`;
+    svg.append(sv("path", {d, fill: pos ? "var(--s1)" : "var(--neg)"}));
+    svg.append(sv("text", {x: pos ? x + 6 : x - 6, y: y + 4, "text-anchor": pos ? "start" : "end", fill: "var(--ink)"}, (pos ? "+" : "") + r.v.toFixed(3)));
+  });
+  host.append(el("div", {class: "chart"}, svg));
+}
+
+// ------------------------------------------------------------------ dataset control
+function dsControls() {
+  document.querySelectorAll("[data-ds-control]").forEach(box => {
+    box.replaceChildren(...Object.entries(DATA.datasets).map(([k, v]) => el("button", {type: "button", "aria-pressed": String(k === state.ds),
+      onclick: () => { state.ds = k; store.set("ds", k); renderAll(); }}, v.label)));
+  });
+}
+
+// ------------------------------------------------------------------ overview
+function renderOverview() {
+  const ad = expById("mvtec_ad", "G_full"), lc = expById("mvtec_loco", "G_full"), x3 = expById("mvtec_loco", "X3_mean");
+  const la = Object.values(DATA.datasets.mvtec_ad.localization), ll = Object.values(DATA.datasets.mvtec_loco.localization);
+  const mean = a => a.reduce((s, x) => s + x, 0) / a.length;
+  const tiles = [
+    ["MVTec AD · full model · image AUROC", f3(ad.macro.auroc), `macro over ${ad.n_eval} categories`],
+    ["MVTec LOCO · full model · image AUROC", f3(lc.macro.auroc), `logical ${f3(lc.macro.logical)} · structural ${f3(lc.macro.structural)}`],
+    ["MVTec LOCO · X3_mean · image AUROC", f3(x3.macro.auroc), "exploratory (designed after the LOCO test)", true],
+    ["MVTec AD · localization · pixel AUROC", f3(mean(la.map(c => c.pixel_auroc))), `AU-PRO@0.3 ${f3(mean(la.map(c => c.au_pro)))}`],
+    ["MVTec LOCO · localization · AU-sPRO@0.05", f3(mean(ll.map(c => c.mean[c.limits.indexOf(0.05)]))), "mean of logical and structural"],
+  ];
+  document.getElementById("tiles").replaceChildren(...tiles.map(([l, v, n, x]) => el("div", {class: "tile"},
+    el("div", {class: "lab"}, ...l.split(" · ").flatMap((t, i) => [i ? " · " : "", el("span", {class: "nb"}, t)]), x ? el("span", {class: "tag"}, "EXPLORATORY") : null), el("div", {class: "val"}, v), el("div", {class: "note"}, n))));
+  const ids = ["A_patchcore", "B_local_st", "C_dino", "H_composition", "D_pc_st", "E_pc_dino", "F_three", "G_full", "G_full_mean", "G_full_or"];
+  const rows = ids.map(id => ({key: id, label: id}));
+  const series = [["mvtec_ad", "MVTec AD", "--s1"], ["mvtec_loco", "MVTec LOCO", "--s2"]].map(([ds, name, color]) => ({name, color,
+    values: Object.fromEntries(ids.map(id => { const e = expById(ds, id); return [id, e ? {v: e.macro.auroc} : null]; }))}));
+  const all = series.flatMap(s => Object.values(s.values).filter(Boolean).map(v => v.v));
+  dotPlot(document.getElementById("ov-chart"), rows, series, {domain: niceDomain(all, 0.5), legendHost: document.getElementById("ov-legend"), ci: false});
+  tableToggle("ov", () => simpleTable(["experiment", "scores", "MVTec AD", "MVTec LOCO"], ids.map(id => {
+    const a = expById("mvtec_ad", id), b = expById("mvtec_loco", id);
+    return [id, (a || b).desc, a ? f3(a.macro.auroc) : "–", b ? f3(b.macro.auroc) : "–"]; }), 2));
+}
+
+// ------------------------------------------------------------------ experiments table
+function renderExperiments() {
+  const d = D(), loco = state.ds === "mvtec_loco";
+  const cols = [["id", "experiment", "l"], ["desc", "scores", "l"], ["fusion", "fusion", "l"], ["cats", "categories"], ["auroc", "macro AUROC"], ["pooled", "pooled AUROC"]]
+    .concat(loco ? [["logical", "logical"], ["structural", "structural"]] : [])
+    .concat(Object.entries(BR).map(([k, v]) => ["br_" + k, v]));
+  const val = (e, k) => k === "id" ? e.id : k === "desc" ? e.desc : k === "fusion" ? e.fusion : k === "cats" ? e.n_eval
+    : k.startsWith("br_") ? e.macro.br[k.slice(3)] : e.macro[k];
+  let sortKey = store.get("sort." + state.ds, "auroc"), asc = false;
+  const exps = d.experiments.filter(e => !e.partial);
+  const draw = () => {
+    const sorted = [...exps].sort((a, b) => { const x = val(a, sortKey), y = val(b, sortKey);
+      return (typeof x === "string" ? String(x).localeCompare(y) : ((x ?? -1) - (y ?? -1))) * (asc ? 1 : -1); });
+    const t = el("table");
+    t.append(el("thead", {}, el("tr", {}, ...cols.map(([k, label, al]) => el("th", {class: "sort " + (al || ""), tabindex: 0,
+      onclick: () => { asc = sortKey === k ? !asc : (k === "id" || k === "desc"); sortKey = k; store.set("sort." + state.ds, k); draw(); },
+      onkeydown: ev => { if (ev.key === "Enter") ev.target.click(); }}, label + (sortKey === k ? (asc ? " ▲" : " ▼") : ""))))));
+    const b = el("tbody");
+    for (const e of sorted) b.append(el("tr", {}, ...cols.map(([k, , al]) => {
+      if (k === "id") return el("td", {class: "l"}, e.id, statusTag(e));
+      if (k === "cats") return el("td", {}, `${e.n_eval}${e.n_na ? ` (+${e.n_na} n/a)` : ""}`);
+      if (k === "auroc") { const v = e.macro.auroc; return el("td", {}, el("span", {class: "bar", style: `width:${Math.max(2, (v - 0.5) / 0.5 * 90)}px`}), f3(v)); }
+      const v = val(e, k); return el("td", {class: al || ""}, typeof v === "number" ? f3(v) : (v ?? "–"));
+    })));
+    t.append(b); document.getElementById("exp-table").replaceChildren(t);
+  };
+  draw();
+  const partial = d.experiments.filter(e => e.partial);
+  const box = document.getElementById("exp-partial");
+  box.replaceChildren(...(partial.length ? [el("div", {class: "card"}, el("h3", {style: "margin-top:0"}, "Partially completed ablations (not comparable)"),
+    el("p", {class: "small"}, "These pre-registered ablations had finished only some categories in this snapshot, so their averages are not comparable with the rows above."),
+    simpleTable(["experiment", "scores", "categories done", "AUROC on those"], partial.map(e => [e.id, e.desc, `${e.n_eval} of ${e.n_expected}`,
+      Object.entries(e.cats).map(([c, v]) => `${pretty(c)} ${f3(v.auroc)}`).join(", ")]), 2))] : []));
+  if (!loco) box.prepend(el("p", {class: "small"}, "Composition (H_composition) is disabled on the five texture categories by design, so it covers 10 categories."));
+}
+
+// ------------------------------------------------------------------ per category
+function renderCategories() {
+  const d = D(), loco = state.ds === "mvtec_loco";
+  const msel = document.getElementById("cat-metric");
+  const metrics = [["auroc", "image AUROC"]].concat(loco ? [["logical", "logical AUROC"], ["structural", "structural AUROC"]] : []);
+  const cur = metrics.some(m => m[0] === msel.value) ? msel.value : "auroc";
+  msel.replaceChildren(...metrics.map(([k, l]) => el("option", {value: k}, l))); msel.value = cur;
+  msel.onchange = renderCategories;
+  const m = msel.value, exps = completeExps(state.ds);
+  const cats = d.categories.map(c => ({key: c, label: pretty(c)}));
+  const rows = exps.map(e => ({key: e.id, label: e.id + (e.status === "EXPLORATORY" ? " (expl.)" : ""), e}));
+  const get = (r, c) => { const v = r.e.cats[c.key]; if (!v) return null; return {v: v[m], lo: m === "auroc" ? v.lo : null, hi: m === "auroc" ? v.hi : null}; };
+  const vals = rows.flatMap(r => cats.map(c => get(r, c))).filter(Boolean).map(v => v.v).filter(v => v !== null && v !== undefined);
+  const lo = Math.max(0.5, Math.floor(Math.min(...vals) * 20) / 20);
+  heatmap(document.getElementById("heat"), rows, cats, get, {lo, hi: 1, caption: "AUROC by experiment and category"});
+  tableToggle("heat", () => simpleTable(["experiment"].concat(cats.map(c => c.label)), rows.map(r => [r.label].concat(cats.map(c => { const v = get(r, c); return v ? f3(v.v) : "n/a"; })))));
+  const a = document.getElementById("cmp-a"), b = document.getElementById("cmp-b");
+  const opts = exps.map(e => e.id);
+  const prevA = opts.includes(a.value) ? a.value : "A_patchcore", prevB = opts.includes(b.value) ? b.value : (loco ? "G_full" : "G_full");
+  for (const s of [a, b]) s.replaceChildren(...opts.map(o => el("option", {value: o}, o)));
+  a.value = prevA; b.value = prevB; a.onchange = b.onchange = renderCategories;
+  const series = [[a.value, "--s1"], [b.value, "--s2"]].map(([id, color]) => { const e = expById(state.ds, id);
+    return {name: id, color, values: Object.fromEntries(d.categories.map(c => { const v = e.cats[c]; return [c, v ? {v: v[m], lo: m === "auroc" ? v.lo : null, hi: m === "auroc" ? v.hi : null} : null]; }))}; });
+  const all = series.flatMap(s => Object.values(s.values).filter(Boolean).flatMap(v => [v.v, v.lo]).filter(x => x !== null && x !== undefined));
+  dotPlot(document.getElementById("cmp-chart"), cats, series, {domain: niceDomain(all, 0.4), legendHost: document.getElementById("cmp-legend"), ci: m === "auroc"});
+  tableToggle("cmp", () => simpleTable(["category", a.value, "95% CI", b.value, "95% CI"], d.categories.map(c => { const x = expById(state.ds, a.value).cats[c], y = expById(state.ds, b.value).cats[c];
+    return [pretty(c), x ? f3(x[m]) : "n/a", x && m === "auroc" ? `${f3(x.lo)} – ${f3(x.hi)}` : "", y ? f3(y[m]) : "n/a", y && m === "auroc" ? `${f3(y.lo)} – ${f3(y.hi)}` : ""]; })));
+}
+
+// ------------------------------------------------------------------ branch AUROC per category
+function renderBranches() {
+  const d = D(), loco = state.ds === "mvtec_loco";
+  const es = document.getElementById("br-exp"), ss = document.getElementById("br-sub");
+  document.getElementById("br-sub-wrap").style.display = loco ? "" : "none";
+  const exps = completeExps(state.ds), prevE = exps.some(e => e.id === es.value) ? es.value : "G_full";
+  es.replaceChildren(...exps.map(e => el("option", {value: e.id}, e.id + (e.status === "EXPLORATORY" ? " (exploratory)" : "")))); es.value = prevE;
+  es.onchange = ss.onchange = renderBranches;
+  const e = expById(state.ds, es.value), sub = loco ? ss.value : "all";
+  const cats = d.categories.filter(c => e.cats[c]);
+  const brKeys = ["fused"].concat(Object.keys(BR).filter(k => cats.some(cc => e.cats[cc].br[k] !== null)));
+  const cols = brKeys.map(k => ({key: k, label: k === "fused" ? "fused" : BR[k]}));
+  const rows = cats.map(cc => ({key: cc, label: pretty(cc)}));
+  const get = (r, col) => { const v = e.cats[r.key]; if (!v) return null;
+    if (col.key === "fused") return sub === "all" ? {v: v.auroc, lo: v.lo, hi: v.hi} : {v: v[sub] ?? null};
+    return {v: (sub === "all" ? v.br[col.key] : ((v.br_sub || {})[sub] || {})[col.key]) ?? null}; };
+  const vals = rows.flatMap(r => cols.map(col => get(r, col))).filter(v => v && v.v !== null && v.v !== undefined).map(v => v.v);
+  const caption = `Branch AUROC per category for ${e.id}` + (sub === "all" ? "" : `, ${sub} anomalies only`);
+  heatmap(document.getElementById("br-heat"), rows, cols, get, {lo: Math.max(0.5, Math.floor(Math.min(...vals) * 20) / 20), hi: 1, caption});
+  tableToggle("br", () => simpleTable(["category"].concat(cols.map(cc => cc.label)), rows.map(r => [r.label].concat(cols.map(col => { const v = get(r, col); return v && v.v != null ? f3(v.v) : "–"; })))));
+}
+
+// ------------------------------------------------------------------ localization
+function renderLoc() {
+  const d = D(), loco = state.ds === "mvtec_loco", body = document.getElementById("loc-body");
+  document.getElementById("loc-sub-wrap").style.display = loco ? "" : "none";
+  const note = document.getElementById("loc-note");
+  if (!loco) {
+    const cats = d.categories.filter(c => d.localization[c]);
+    const series = [{name: "pixel AUROC", color: "--s1", values: Object.fromEntries(cats.map(c => [c, {v: d.localization[c].pixel_auroc}]))},
+                    {name: "AU-PRO@0.3", color: "--s2", values: Object.fromEntries(cats.map(c => [c, {v: d.localization[c].au_pro}]))}];
+    const lg = el("div", {class: "legend"}), ch = el("div", {class: "chart"});
+    body.replaceChildren(el("h3", {style: "margin-top:0"}, "Full model localization per category"), lg, ch,
+      simpleTable(["category", "pixel AUROC", "AU-PRO@0.3"], cats.map(c => [pretty(c), f3(d.localization[c].pixel_auroc), f3(d.localization[c].au_pro)])));
+    dotPlot(ch, cats.map(c => ({key: c, label: pretty(c)})), series, {domain: niceDomain(series.flatMap(s => Object.values(s.values).map(v => v.v)), 0.5), legendHost: lg, ci: false});
+    note.textContent = "Pixel AUROC and AU-PRO (per-region overlap, integrated up to 0.3 and normalized) for the fused map of PatchCore, the student–teacher and DINO; composition has no map. AU-PRO is a re-implementation of the official algorithm, checked against a brute-force sweep.";
+  } else {
+    const sub = document.getElementById("loc-sub").value; document.getElementById("loc-sub").onchange = renderLoc;
+    const cats = d.categories.filter(c => d.localization[c]), limits = d.localization[cats[0]].limits;
+    const colors = ["--s1", "--s2", "--s3", "--s4", "--s5"];
+    const series = cats.map((c, i) => ({name: pretty(c), color: colors[i], x: d.localization[c].limits, y: d.localization[c][sub], markers: true}));
+    const lg = el("div", {class: "legend"}, ...series.map(s => el("span", {}, el("i", {class: "key-line", style: `background:var(${s.color})`}), s.name)));
+    const ch = el("div", {class: "chart"});
+    body.replaceChildren(el("h3", {style: "margin-top:0"}, `Full model AU-sPRO by integration limit (${sub === "mean" ? "mean of logical and structural" : sub})`), lg, ch,
+      simpleTable(["category"].concat(limits.map(l => `limit ${l}`)), cats.map(c => [pretty(c)].concat(d.localization[c][sub].map(f3)))));
+    lineChart(ch, series, {xDomain: [limits[0], limits[limits.length - 1]], yDomain: [0, 1], logX: true, snap: limits, square: false,
+      xLabel: "integration limit", yLabel: "AU-sPRO", title: "AU-sPRO by integration limit"});
+    note.textContent = "AU-sPRO from the official MVTec LOCO evaluator v2.0, run on full-resolution fused maps. The headline value uses the 0.05 limit. The evaluator samples its starting points at random, so repeated runs can differ in the sixth decimal place.";
+  }
+}
+
+// ------------------------------------------------------------------ X3
+function renderX3() {
+  const ids = ["G_full", "G_full_mean", "X3_mean", "X3_max"].map(id => expById("mvtec_loco", id)).filter(Boolean);
+  document.getElementById("x3-table").replaceChildren(simpleTable(["model", "status", "macro AUROC", "pooled AUROC", "logical", "structural", "balanced"],
+    ids.map(e => [e.id, e.status === "EXPLORATORY" ? "exploratory" : (e.id === "G_full" ? "confirmatory (headline)" : "confirmatory (pre-registered ablation)"),
+      f3(e.macro.auroc), f3(e.macro.pooled), f3(e.macro.logical), f3(e.macro.structural), f3(e.macro.balanced)]), 2));
+  const g = expById("mvtec_loco", "G_full"), x = expById("mvtec_loco", "X3_mean"), cats = DATA.datasets.mvtec_loco.categories;
+  const host = document.getElementById("x3-delta"); host.replaceChildren();
+  const parts = [["auroc", "image AUROC"], ["logical", "logical AUROC"], ["structural", "structural AUROC"]];
+  const all = parts.flatMap(([k]) => cats.map(c => Math.abs(x.cats[c][k] - g.cats[c][k])));
+  const dom = Math.max(0.05, Math.ceil(Math.max(...all) * 20) / 20);
+  for (const [k, label] of parts) deltaBars(host, cats.map(c => ({label: pretty(c), v: x.cats[c][k] - g.cats[c][k]})), label, dom);
+  tableToggle("x3d", () => simpleTable(["category"].concat(parts.flatMap(([, l]) => [`G_full ${l}`, `X3_mean ${l}`, "change"])),
+    cats.map(c => [pretty(c)].concat(parts.flatMap(([k]) => [f3(g.cats[c][k]), f3(x.cats[c][k]), (x.cats[c][k] - g.cats[c][k] >= 0 ? "+" : "") + f3(x.cats[c][k] - g.cats[c][k])])))));
+}
+
+// ------------------------------------------------------------------ about
+function renderAbout() {
+  const p = DATA.provenance;
+  const items = [
+    ["What is shown", "AUROC-based metrics only: image AUROC with stratified bootstrap 95% confidence intervals, logical and structural AUROC (MVTec LOCO), each branch's own AUROC, pooled AUROC, and the localization metrics (pixel AUROC, AU-PRO, AU-sPRO). The pre-registered evaluation also computed threshold-dependent metrics; they are omitted from this package."],
+    ["Where the numbers come from", "Every value is read from runs/: aggregate.json and category_metrics.csv per experiment, predictions.csv (per-image scores and labels, used to re-check every AUROC and for the logical and structural branch AUROCs) and localization.json per category. Rebuild this page with scripts/build_visualiser.py after any change."],
+    ["Confirmatory versus exploratory", `The results in runs/ were produced by the pre-registered pipeline (code hash ${p.prereg_hash}, pre-registration ${p.prereg_created} UTC). The code shipped in this package is a derivative with the threshold-dependent computation removed (code hash ${p.package_hash}), so anything it re-runs is labelled exploratory. X3 is exploratory because it was designed after the LOCO test results were seen.`],
+    ["Use of the test sets", `The test-access log excerpt for the experiments in this package records ${p.access.total} test-set evaluations (${p.access.confirmatory} confirmatory, ${p.access.exploratory} exploratory, the latter being X3). Earlier separate projects on the same machine had already evaluated on the official test splits, so no untouched real-anomaly set exists for independent confirmation.`],
+    ["Partial results", "Some pre-registered ablations (attention and head variants) had finished only some categories in this snapshot; they are listed separately in the Experiments tab and left out of averages and charts."],
+  ];
+  document.getElementById("about").replaceChildren(...items.flatMap(([h, t]) => [el("h3", {}, h), el("p", {class: "sub"}, t)]));
+}
+
+// ------------------------------------------------------------------ tabs, theme
+function renderAll() {
+  dsControls();
+  renderOverview(); renderExperiments(); renderCategories(); renderBranches(); renderLoc(); renderX3(); renderAbout();
+}
+function selectTab(name) {
+  state.tab = name; store.set("tab", name);
+  document.querySelectorAll("nav.tabs button").forEach(b => b.setAttribute("aria-selected", String(b.dataset.tab === name)));
+  document.querySelectorAll("section[role=tabpanel]").forEach(s => s.classList.toggle("active", s.id === "tab-" + name));
+  hideTip();
+}
+document.querySelectorAll("nav.tabs button").forEach(b => b.addEventListener("click", () => selectTab(b.dataset.tab)));
+const themeBtn = document.getElementById("theme");
+function applyTheme(t) {
+  if (t === "system") document.documentElement.removeAttribute("data-theme"); else document.documentElement.setAttribute("data-theme", t);
+  themeBtn.textContent = "Theme: " + t; store.set("theme", t);
+}
+themeBtn.addEventListener("click", () => { const order = ["system", "light", "dark"]; const cur = store.get("theme", "system");
+  applyTheme(order[(order.indexOf(cur) + 1) % 3]); renderAll(); });
+const urlTheme = new URLSearchParams(location.search).get("theme");
+applyTheme(["light", "dark", "system"].includes(urlTheme) ? urlTheme : store.get("theme", "system"));
+const urlDs = new URLSearchParams(location.search).get("ds");
+if (urlDs && DATA.datasets[urlDs]) state.ds = urlDs;
+if (!DATA.datasets[state.ds]) state.ds = "mvtec_ad";
+renderAll();
+const fromHash = () => { const t = location.hash.slice(1); return document.getElementById("tab-" + t) ? t : null; };
+selectTab(fromHash() || (document.getElementById("tab-" + state.tab) ? state.tab : "overview"));
+window.addEventListener("hashchange", () => { const t = fromHash(); if (t) selectTab(t); });
+window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => renderAll());
+</script>
+</body>
+</html>

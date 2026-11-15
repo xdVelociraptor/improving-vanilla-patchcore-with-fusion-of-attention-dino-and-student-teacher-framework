@@ -1,0 +1,9 @@
+extends: [../base.yaml]
+experiment:
+  name: R_dino_published
+  description: PUBLISHED-PROTOCOL REPRODUCTION of Dinomaly per-class preprocessing (448 -> centre crop 392) on the full MVTec AD training set
+  reproduction: true
+  datasets: [mvtec_ad]
+  branches:
+    global_attention: reproduction/dino_recon_published.yaml
+  fusion: max

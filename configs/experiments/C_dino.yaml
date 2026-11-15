@@ -1,0 +1,8 @@
+extends:
+- ../base.yaml
+experiment:
+  name: C_dino
+  description: DINOv2 global-attention reconstruction alone
+  branches:
+    global_attention: branches/dino_recon_ref.yaml
+  fusion: max

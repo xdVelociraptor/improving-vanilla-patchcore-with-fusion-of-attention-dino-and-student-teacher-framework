@@ -1,0 +1,3 @@
+# Manifest metadata records a SHA-256 of the exact CSV bytes.
+/manifests/** -text
+/manifests_smoke/** -text

@@ -1,0 +1,9 @@
+extends:
+- ../base.yaml
+experiment:
+  name: A_patchcore_reweight
+  description: PatchCore with the paper's neighbourhood re-weighting (separately named
+    variant)
+  branches:
+    patchcore: branches/patchcore_reweight.yaml
+  fusion: max

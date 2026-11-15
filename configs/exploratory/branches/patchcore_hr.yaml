@@ -1,0 +1,10 @@
+# EXPLORATORY X3 (docs/X3.md): separately named higher-resolution PatchCore. Protected branch untouched.
+extends: [../../branches/patchcore_ref.yaml]
+branch: patchcore_hr
+variant: patchcore_hr_x3
+coreset_percentage: 0.01        # author IM320 setting
+cache: false
+batch_size: 4
+transform:
+  mvtec_ad: {kind: resize_crop, size: 366, crop: 320, normalize: imagenet}
+  mvtec_loco: {kind: letterbox, size: 512, normalize: imagenet}

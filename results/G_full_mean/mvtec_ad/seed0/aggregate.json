@@ -1,0 +1,38 @@
+{
+  "categories_evaluated": [
+    "bottle",
+    "cable",
+    "capsule",
+    "carpet",
+    "grid",
+    "hazelnut",
+    "leather",
+    "metal_nut",
+    "pill",
+    "screw",
+    "tile",
+    "toothbrush",
+    "transistor",
+    "wood",
+    "zipper"
+  ],
+  "categories_failed": {},
+  "categories_missing": [],
+  "dataset": "mvtec_ad",
+  "evaluation_status": {
+    "confirmatory": true,
+    "reasons": []
+  },
+  "experiment": "G_full_mean",
+  "fusion": "mean",
+  "macro_auroc": 0.9967292307282858,
+  "macro_branch_auroc__composition": 0.871465698903185,
+  "macro_branch_auroc__global_attention": 0.9971103256012595,
+  "macro_branch_auroc__local_st": 0.9631082359448725,
+  "macro_branch_auroc__patchcore": 0.9897494609510069,
+  "note": "fields other than AUROC-related ones were removed from this copy after the evaluation; values kept here are unchanged, and binding hashes refer to the original records",
+  "partial_run": false,
+  "pooled_auroc_of_fused_scores": 0.9847400618908365,
+  "pooled_note": "pooled AUROC ranks standardized fused scores across categories and is reported only as a labelled secondary number; the macro mean over categories is the primary summary",
+  "seed": 0
+}

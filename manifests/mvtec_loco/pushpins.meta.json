@@ -1,0 +1,19 @@
+{
+  "calibration_reuse": false,
+  "category": "pushpins",
+  "counts": {
+    "calib_scale": 35,
+    "calib_threshold": 34,
+    "fit": 372,
+    "test": 310
+  },
+  "dataset": "mvtec_loco",
+  "duplicate_groups": [],
+  "manifest_sha256": "8fc07db2fe9a3c397b5ad3bcd18ed5015a8ec11ee0a2d0c40a1d234b7b60cf60",
+  "protocol": {
+    "ad_calibration_fraction": 0.2,
+    "ad_calibration_min": 10,
+    "separate_scale_threshold_min": 40,
+    "split_salt": "hybridad-split-v1"
+  }
+}

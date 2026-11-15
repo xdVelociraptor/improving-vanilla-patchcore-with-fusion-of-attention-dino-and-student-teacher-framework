@@ -1,0 +1,19 @@
+{
+  "calibration_reuse": false,
+  "category": "juice_bottle",
+  "counts": {
+    "calib_scale": 27,
+    "calib_threshold": 27,
+    "fit": 335,
+    "test": 330
+  },
+  "dataset": "mvtec_loco",
+  "duplicate_groups": [],
+  "manifest_sha256": "d1ca979f20dbeaee00287e8b854cd8d80c5447328918e3eb2b37c9d8998a4638",
+  "protocol": {
+    "ad_calibration_fraction": 0.2,
+    "ad_calibration_min": 10,
+    "separate_scale_threshold_min": 40,
+    "split_salt": "hybridad-split-v1"
+  }
+}

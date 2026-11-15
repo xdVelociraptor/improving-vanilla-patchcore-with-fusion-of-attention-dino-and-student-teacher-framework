@@ -1,0 +1,9 @@
+# Optional: copy to configs/local.yaml to point the pipeline at data or a work directory OUTSIDE this folder.
+# By default the project looks under data/ and work/ here; relative paths resolve against the project root.
+paths:
+  datasets:
+    mvtec_ad: D:/data/MVTecAD
+    mvtec_loco: D:/data/MVTec_LOCO
+  work_dir: D:/kutty_dinosaur_work   # e.g. a larger disk for the feature caches that retraining creates
+runtime:
+  device: cuda

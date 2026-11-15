@@ -1,0 +1,19 @@
+{
+  "calibration_reuse": false,
+  "category": "grid",
+  "counts": {
+    "calib_scale": 27,
+    "calib_threshold": 26,
+    "fit": 211,
+    "test": 78
+  },
+  "dataset": "mvtec_ad",
+  "duplicate_groups": [],
+  "manifest_sha256": "c48aeae2c3ac0d4c8cdf38de2f442f3ce54bec48ef1cb9d176b10155be5409b2",
+  "protocol": {
+    "ad_calibration_fraction": 0.2,
+    "ad_calibration_min": 10,
+    "separate_scale_threshold_min": 40,
+    "split_salt": "hybridad-split-v1"
+  }
+}

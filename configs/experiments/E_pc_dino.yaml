@@ -1,0 +1,9 @@
+extends:
+- ../base.yaml
+experiment:
+  name: E_pc_dino
+  description: PatchCore + DINOv2 reconstruction
+  branches:
+    patchcore: branches/patchcore_ref.yaml
+    global_attention: branches/dino_recon_ref.yaml
+  fusion: max

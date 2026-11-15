@@ -1,0 +1,8 @@
+extends:
+- ../base.yaml
+experiment:
+  name: B_local_st_top1
+  description: Local ST, top-1% pooling instead of max (ablation)
+  branches:
+    local_st: branches/local_st_top1.yaml
+  fusion: max

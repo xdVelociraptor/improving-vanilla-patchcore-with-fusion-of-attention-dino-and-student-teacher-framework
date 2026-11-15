@@ -1,0 +1,19 @@
+{
+  "calibration_reuse": false,
+  "category": "metal_nut",
+  "counts": {
+    "calib_scale": 22,
+    "calib_threshold": 22,
+    "fit": 176,
+    "test": 115
+  },
+  "dataset": "mvtec_ad",
+  "duplicate_groups": [],
+  "manifest_sha256": "acbcedfbd8a230ca26f753626d4f71d0acf7679b7cb086e585a4ed42280175c4",
+  "protocol": {
+    "ad_calibration_fraction": 0.2,
+    "ad_calibration_min": 10,
+    "separate_scale_threshold_min": 40,
+    "split_salt": "hybridad-split-v1"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "calibration_reuse": false,
+  "category": "bottle",
+  "counts": {
+    "calib_scale": 21,
+    "calib_threshold": 21,
+    "fit": 167,
+    "test": 83
+  },
+  "dataset": "mvtec_ad",
+  "duplicate_groups": [],
+  "manifest_sha256": "fb688b9d329a6f27b8ed510de825d516d90c222314f5d58526a223de0b5fb412",
+  "protocol": {
+    "ad_calibration_fraction": 0.2,
+    "ad_calibration_min": 10,
+    "separate_scale_threshold_min": 40,
+    "split_salt": "hybridad-split-v1"
+  }
+}

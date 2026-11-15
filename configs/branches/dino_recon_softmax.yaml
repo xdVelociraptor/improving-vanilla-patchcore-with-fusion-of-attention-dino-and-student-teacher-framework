@@ -1,0 +1,4 @@
+# ABLATION: softmax attention in place of linear attention. Everything else identical.
+extends: [dino_recon_ref.yaml]
+variant: dino_recon_softmax
+head: {width: 768, heads: 12, depth: 8, attention: softmax, bottleneck_dropout: 0.2}

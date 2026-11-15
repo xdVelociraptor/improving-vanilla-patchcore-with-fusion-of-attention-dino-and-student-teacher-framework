@@ -1,0 +1,10 @@
+# EXPLORATORY X3: composition at an 896-px letterbox (64x64 tokens) with normal-gated count evidence.
+extends: [../../branches/composition_ref.yaml]
+branch: composition_hr
+variant: composition_hr_x3
+groups: {mass: true, appearance: true, layout: true, adjacency: true, counts: true}
+count_stability: 0.9
+count_min_cells: 3
+transform:
+  mvtec_ad: {kind: resize_square, size: 896, normalize: imagenet}
+  mvtec_loco: {kind: letterbox, size: 896, normalize: imagenet}

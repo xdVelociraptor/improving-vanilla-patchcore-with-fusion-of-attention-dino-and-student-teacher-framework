@@ -1,0 +1,8 @@
+extends:
+- ../base.yaml
+experiment:
+  name: A_patchcore
+  description: PatchCore alone (paired experimental baseline on the fit split)
+  branches:
+    patchcore: branches/patchcore_ref.yaml
+  fusion: max

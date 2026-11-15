@@ -1,0 +1,19 @@
+{
+  "calibration_reuse": false,
+  "category": "tile",
+  "counts": {
+    "calib_scale": 23,
+    "calib_threshold": 23,
+    "fit": 184,
+    "test": 117
+  },
+  "dataset": "mvtec_ad",
+  "duplicate_groups": [],
+  "manifest_sha256": "b829f18459fd28e6837f47251ddea6d37ca81d17e385f6b1cd539653e55ab23a",
+  "protocol": {
+    "ad_calibration_fraction": 0.2,
+    "ad_calibration_min": 10,
+    "separate_scale_threshold_min": 40,
+    "split_salt": "hybridad-split-v1"
+  }
+}

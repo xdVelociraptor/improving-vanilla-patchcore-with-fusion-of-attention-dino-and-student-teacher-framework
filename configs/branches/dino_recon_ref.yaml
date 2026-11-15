@@ -1,0 +1,37 @@
+# DINOv2 global-attention reconstruction branch (Dinomaly-style ViTill), ADAPTED to full images.
+# Reference values from Dinomaly dinomaly_mvtec_sep.py (per-class script) @ 1f252be.
+branch: global_attention
+variant: dino_recon_ref
+encoder: dinov2_vitb14_reg4
+pos_interp: dinomaly            # antialias=False, offset=0.1 as Dinomaly loads it ('official' = hub setting)
+target_layers: [2, 3, 4, 5, 6, 7, 8, 9]   # zero-based block indices
+fuse_layer_encoder: [[0, 1, 2, 3], [4, 5, 6, 7]]
+fuse_layer_decoder: [[0, 1, 2, 3], [4, 5, 6, 7]]
+head: {width: 768, heads: 12, depth: 8, attention: linear, bottleneck_dropout: 0.2}
+iterations: 5000                # per-class script; its save_name says it10k, the code runs 5000
+batch_size: 16
+micro_batch: 16                 # gradient accumulation only if explicitly configured
+lr: 2.0e-3
+final_lr: 2.0e-4
+warmup_iters: 100
+weight_decay: 1.0e-4
+eps: 1.0e-8                     # per-class script (unified script uses 1e-10)
+grad_clip: 0.1
+hm_p_final: 0.9
+hm_warmup_iters: 1000
+hm_factor: 0.1
+encoder_precision: fp32
+matmul_precision: tf32          # USER-APPROVED speed-up (2026-09-26): TF32 matmuls (108 -> 69 min measured).
+                                # Dinomaly's torch 1.12 default is fp32 (TF32 off): documented numeric deviation
+encoder_cache: true             # exact: frozen-encoder outputs of fitting images computed once (no augmentation)
+decoder_precision: fp32
+activation_checkpointing: true  # exact recomputation; needed because batch 16 at 1029 tokens peaks at 10.8 GiB > 8 GiB
+min_valid_fraction: 0.5
+mask_loss: true
+checkpoint_every: 1000
+pool_fractions: [0.01, 0.005, 0.05]
+score_batch_size: 8
+primary_score: grid_top1pct     # ADAPTED pooling: top 1% of valid 32x32 grid cells
+transform:
+  mvtec_ad: {kind: resize_square, size: 448, normalize: imagenet}     # full image (no centre crop) -> 32x32
+  mvtec_loco: {kind: letterbox, size: 448, normalize: imagenet}       # full scene, aspect kept -> 32x32

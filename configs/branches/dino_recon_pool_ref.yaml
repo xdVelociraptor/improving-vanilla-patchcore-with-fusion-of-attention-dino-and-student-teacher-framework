@@ -1,0 +1,4 @@
+# ABLATION of the pooling LOCATION only (same model/scores as dino_recon_ref): Dinomaly's reference
+# image score = top 1% of the map upsampled to input size, resized to 256 and Gaussian-smoothed.
+extends: [dino_recon_ref.yaml]
+primary_score: ref_top1pct_256_gauss

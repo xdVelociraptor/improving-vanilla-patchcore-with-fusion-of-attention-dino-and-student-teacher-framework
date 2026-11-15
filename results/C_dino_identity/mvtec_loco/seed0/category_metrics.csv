@@ -1,0 +1,2 @@
+dataset,category,n_test,n_anomalous,n_normal,auroc,auroc_note,auroc_ci_lo,auroc_ci_hi,auroc_logical,n_logical,auroc_structural,n_structural,auroc_balanced_logical_structural,branch_auroc__patchcore,branch_auroc__local_st,branch_auroc__global_attention,branch_auroc__composition
+mvtec_loco,breakfast_box,275,173,102,0.9097245834750085,,0.8703941403150856,0.9421426952283805,0.8808173871958422,83,0.9363834422657952,90,0.9086004147308187,,,0.9097245834750085,

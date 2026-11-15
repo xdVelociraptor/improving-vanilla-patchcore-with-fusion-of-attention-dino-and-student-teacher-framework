@@ -1,0 +1,19 @@
+{
+  "calibration_reuse": false,
+  "category": "splicing_connectors",
+  "counts": {
+    "calib_scale": 30,
+    "calib_threshold": 30,
+    "fit": 360,
+    "test": 312
+  },
+  "dataset": "mvtec_loco",
+  "duplicate_groups": [],
+  "manifest_sha256": "ef375e92fac7b598d5af58c7425b66acb200bd6cb970be7d972d975b64e7a5fa",
+  "protocol": {
+    "ad_calibration_fraction": 0.2,
+    "ad_calibration_min": 10,
+    "separate_scale_threshold_min": 40,
+    "split_salt": "hybridad-split-v1"
+  }
+}

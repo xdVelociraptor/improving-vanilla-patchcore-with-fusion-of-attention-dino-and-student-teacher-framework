@@ -1,0 +1,13 @@
+# EXPLORATORY X3 (mean fusion). Evaluated once on the LOCO test split; never confirmatory.
+extends: [../../base.yaml]
+paths: {runs: runs_rerun/exploratory}
+experiment:
+  name: X3_mean
+  description: "EXPLORATORY: protected PatchCore + patchcore_hr + local ST + DINO recon + composition_hr, mean fusion"
+  branches:
+    patchcore: branches/patchcore_ref.yaml
+    patchcore_hr: exploratory/branches/patchcore_hr.yaml
+    local_st: branches/local_st_ref.yaml
+    global_attention: branches/dino_recon_ref.yaml
+    composition_hr: exploratory/branches/composition_hr.yaml
+  fusion: mean

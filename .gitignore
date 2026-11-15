@@ -1,0 +1,45 @@
+# Separately distributed inputs and local output
+/data/
+/external_data/
+/weights/
+/work/
+/runs/
+/runs_rerun/
+/runs_check/
+/logs/
+/configs/local.yaml
+/docs/environment.json
+/docs/figures/composition_clusters_breakfast_box.png
+/kutty dinosaur.pdf
+/visualiser.html
+
+# Local Python environments and build outputs
+.venv*/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.ipynb_checkpoints/
+*.egg-info/
+/build/
+/dist/
+
+# Large artifacts and local credentials
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*.npy
+*.npz
+*.tar
+*.tar.gz
+*.tgz
+*.zip
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+Thumbs.db
+.DS_Store

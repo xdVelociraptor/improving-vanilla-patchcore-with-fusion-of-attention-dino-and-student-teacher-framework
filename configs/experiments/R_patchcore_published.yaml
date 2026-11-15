@@ -1,0 +1,9 @@
+extends: [../base.yaml]
+experiment:
+  name: R_patchcore_published
+  description: PUBLISHED-PROTOCOL REPRODUCTION of PatchCore IM224 on the full official MVTec AD training set (AUROC only)
+  reproduction: true
+  datasets: [mvtec_ad]
+  branches:
+    patchcore: branches/patchcore_ref.yaml
+  fusion: max

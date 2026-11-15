@@ -1,0 +1,19 @@
+{
+  "calibration_reuse": false,
+  "category": "pill",
+  "counts": {
+    "calib_scale": 27,
+    "calib_threshold": 26,
+    "fit": 214,
+    "test": 167
+  },
+  "dataset": "mvtec_ad",
+  "duplicate_groups": [],
+  "manifest_sha256": "e77f94520b3c49a37b00dfcb6bb28b4a29453e35d16ff6e861537eb40a49f27c",
+  "protocol": {
+    "ad_calibration_fraction": 0.2,
+    "ad_calibration_min": 10,
+    "separate_scale_threshold_min": 40,
+    "split_salt": "hybridad-split-v1"
+  }
+}

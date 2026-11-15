@@ -1,0 +1,19 @@
+{
+  "calibration_reuse": false,
+  "category": "transistor",
+  "counts": {
+    "calib_scale": 22,
+    "calib_threshold": 21,
+    "fit": 170,
+    "test": 100
+  },
+  "dataset": "mvtec_ad",
+  "duplicate_groups": [],
+  "manifest_sha256": "d03000d88d8e91663ead3385feb5a8f0a5c71d079b78b6358bb88a0df348404f",
+  "protocol": {
+    "ad_calibration_fraction": 0.2,
+    "ad_calibration_min": 10,
+    "separate_scale_threshold_min": 40,
+    "split_salt": "hybridad-split-v1"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "calibration_reuse": false,
+  "category": "breakfast_box",
+  "counts": {
+    "calib_scale": 31,
+    "calib_threshold": 31,
+    "fit": 351,
+    "test": 275
+  },
+  "dataset": "mvtec_loco",
+  "duplicate_groups": [],
+  "manifest_sha256": "4ea1fe87e8af307f3d219cf55947b5e14ad3c194f247157203c478bab30f40ef",
+  "protocol": {
+    "ad_calibration_fraction": 0.2,
+    "ad_calibration_min": 10,
+    "separate_scale_threshold_min": 40,
+    "split_salt": "hybridad-split-v1"
+  }
+}

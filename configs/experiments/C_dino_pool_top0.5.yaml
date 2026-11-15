@@ -1,0 +1,8 @@
+extends:
+- ../base.yaml
+experiment:
+  name: C_dino_pool_top0.5
+  description: DINO reconstruction, top-0.5% pooling (ablation)
+  branches:
+    global_attention: branches/dino_recon_pool_top0.5.yaml
+  fusion: max

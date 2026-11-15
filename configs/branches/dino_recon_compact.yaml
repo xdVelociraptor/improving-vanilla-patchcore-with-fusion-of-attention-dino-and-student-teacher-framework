@@ -1,0 +1,6 @@
+# PROPOSED ENGINEERING CHOICE (not a published setting): compact head, 4 blocks at width 384 / 6 heads,
+# with linear projections 768->384->768. Decoder groups [[0,1],[2,3]] mirror the reference grouping.
+extends: [dino_recon_ref.yaml]
+variant: dino_recon_compact
+head: {width: 384, heads: 6, depth: 4, attention: linear, bottleneck_dropout: 0.2}
+fuse_layer_decoder: [[0, 1], [2, 3]]

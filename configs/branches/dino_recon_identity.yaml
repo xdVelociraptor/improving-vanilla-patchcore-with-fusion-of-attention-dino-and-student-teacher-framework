@@ -1,0 +1,5 @@
+# ABLATION (matched non-attention control): identical parameters and budget, but the attention
+# matrix is the identity, so the decoder performs NO cross-token mixing.
+extends: [dino_recon_ref.yaml]
+variant: dino_recon_identity
+head: {width: 768, heads: 12, depth: 8, attention: identity, bottleneck_dropout: 0.2}

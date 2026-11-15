@@ -1,0 +1,47 @@
+# Shared defaults. Relative paths resolve inside the project folder. See DATA_AND_LICENSES.md for downloads.
+# Override the paths with a local YAML (see configs/local.example.yaml) or the HYBRIDAD_* environment
+# variables documented in README.
+paths:
+  datasets:
+    mvtec_ad: data/MVTecAD
+    mvtec_loco: data/MVTec_LOCO
+  # Trained models, score files, feature caches and LOCO maps. Caches are rebuilt on demand and can be large.
+  work_dir: work
+  manifests: manifests
+  # Saved results of this package (read by `hybridad report`; never written by the pipeline).
+  saved_runs: runs
+  # Every new pipeline output (prepare / evaluate / localize) goes here, so runs/ stays untouched.
+  runs: runs_rerun
+  imagenette: external_data/imagenette2/train
+
+runtime:
+  device: auto
+  num_workers: 0          # Windows DataLoader workers re-import the package; 0 is the safe default
+  deterministic: true
+
+datasets:
+  mvtec_ad:
+    categories: [bottle, cable, capsule, carpet, grid, hazelnut, leather, metal_nut, pill, screw, tile,
+                 toothbrush, transistor, wood, zipper]
+    textures: [carpet, grid, leather, tile, wood]
+  mvtec_loco:
+    categories: [breakfast_box, juice_bottle, pushpins, screw_bag, splicing_connectors]
+    textures: []
+
+protocol:
+  # MVTec AD: a deterministic hash-ordered subset of train/good is held out for calibration.
+  ad_calibration_fraction: 0.2
+  ad_calibration_min: 10
+  # Calibration pools with at least this many images are split into two disjoint halves (key name kept for
+  # manifest compatibility); smaller pools are reused for both and flagged (calib_shared).
+  separate_scale_threshold_min: 40
+  split_salt: hybridad-split-v1
+
+calibration:
+  normalizer_quantile: 0.95
+  missing_score_policy: flag_anomalous   # a missing branch score becomes a maximal alarm, never a normal pass
+  or_alpha: 0.10                    # OR fusion rule only: per-branch offsets use alpha / n_branches (normal images)
+
+evaluation:                         # AUROC with a stratified bootstrap 95 % confidence interval
+  bootstrap_resamples: 2000
+  bootstrap_seed: 0

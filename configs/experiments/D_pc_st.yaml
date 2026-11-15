@@ -1,0 +1,9 @@
+extends:
+- ../base.yaml
+experiment:
+  name: D_pc_st
+  description: PatchCore + local student-teacher
+  branches:
+    patchcore: branches/patchcore_ref.yaml
+    local_st: branches/local_st_ref.yaml
+  fusion: max

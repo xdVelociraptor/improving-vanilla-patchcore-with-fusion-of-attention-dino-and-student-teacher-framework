@@ -1,0 +1,21 @@
+# Explicitly local student-teacher branch (EfficientAD-S local pathway ADAPTATION; no autoencoder).
+# Reference implementation: anomalib efficient_ad (third-party). Paper: arXiv 2303.14535.
+branch: local_st
+variant: local_st_ref
+pdn: small                  # 33x33 receptive field, stride 4 (asserted in tests)
+student_out_channels: 384   # anomalib uses 768 = 384 (teacher imitation) + 384 (autoencoder imitation); AE omitted
+train_steps: 70000
+lr: 1.0e-4
+weight_decay: 1.0e-5
+lr_step_fraction: 0.95
+lr_gamma: 0.1
+lr_schedule_unit: step      # paper: decay at 66,500 iterations. anomalib steps StepLR per EPOCH (never decays at 70k steps)
+hard_quantile: 0.999
+penalty: imagenette         # generic-image penalty data (anomalib: ImageNette; paper: ImageNet)
+min_valid_fraction: 0.5
+checkpoint_every: 5000
+tail_fraction: 0.01         # for the separately reported top-1% score (ablation)
+primary_score: max          # reference aggregation
+transform:
+  mvtec_ad: {kind: resize_square, size: 256, normalize: none}     # anomalib: Resize((256,256))
+  mvtec_loco: {kind: letterbox, size: 256, normalize: none}       # ADAPTATION: whole scene, aspect kept

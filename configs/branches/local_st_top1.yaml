@@ -1,0 +1,5 @@
+# ABLATION: same trained model as local_st_ref (identical variant hash is NOT shared because the
+# primary score differs) -> image score = mean of the top 1% of valid map pixels instead of max.
+extends: [local_st_ref.yaml]
+variant: local_st_ref
+primary_score: top1pct

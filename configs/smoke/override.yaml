@@ -1,0 +1,42 @@
+# Synthetic smoke fixture overrides: CODE CORRECTNESS ONLY, never benchmark evidence.
+# Separate manifests/runs directories keep synthetic outputs apart from real-dataset results.
+paths:
+  runs: runs_smoke
+  manifests: manifests_smoke
+datasets:
+  synthetic_ad: {categories: [blobs], textures: []}
+  synthetic_loco: {categories: [pairs], textures: []}
+protocol:
+  ad_calibration_fraction: 0.3
+  separate_scale_threshold_min: 10   # exercises the two-half calibration path on tiny pools
+evaluation:
+  bootstrap_resamples: 200
+branch_overrides:
+  patchcore:
+    transform:
+      synthetic_ad: {kind: resize_crop, size: 72, crop: 64, normalize: imagenet}
+      synthetic_loco: {kind: letterbox, size: 64, normalize: imagenet}
+  local_st:
+    train_steps: 24
+    checkpoint_every: 10
+    transform:
+      synthetic_ad: {kind: resize_square, size: 96, normalize: none}
+      synthetic_loco: {kind: letterbox, size: 96, normalize: none}
+  global_attention:
+    iterations: 8
+    batch_size: 4
+    micro_batch: 2
+    warmup_iters: 2
+    hm_warmup_iters: 4
+    checkpoint_every: 3
+    transform:
+      synthetic_ad: {kind: resize_square, size: 112, normalize: imagenet}
+      synthetic_loco: {kind: letterbox, size: 112, normalize: imagenet}
+  composition:
+    pca_dim: 16
+    n_clusters: 4
+    fit_token_subsample: 5000
+    min_valid_cells: 8
+    transform:
+      synthetic_ad: {kind: resize_square, size: 112, normalize: imagenet}
+      synthetic_loco: {kind: letterbox, size: 112, normalize: imagenet}

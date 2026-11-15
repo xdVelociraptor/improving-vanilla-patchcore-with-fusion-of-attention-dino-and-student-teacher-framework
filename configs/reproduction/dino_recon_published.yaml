@@ -1,0 +1,7 @@
+# PUBLISHED-PROTOCOL REPRODUCTION (MVTec AD only): Resize(448,448) -> CenterCrop(392) -> 28x28 grid,
+# reference pooling. Separately named; never used by the hybrid experiments.
+extends: [../branches/dino_recon_ref.yaml]
+variant: dino_recon_published_repro
+primary_score: ref_top1pct_256_gauss
+transform:
+  mvtec_ad: {kind: resize_square_crop, size: 448, crop: 392, normalize: imagenet}

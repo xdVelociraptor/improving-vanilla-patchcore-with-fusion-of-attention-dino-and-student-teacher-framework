@@ -1,0 +1,19 @@
+{
+  "calibration_reuse": false,
+  "category": "pairs",
+  "counts": {
+    "calib_scale": 6,
+    "calib_threshold": 6,
+    "fit": 40,
+    "test": 26
+  },
+  "dataset": "synthetic_loco",
+  "duplicate_groups": [],
+  "manifest_sha256": "299cbdd191874b64c1fbecd53831d7422070578ffbc44e236c62b016c9b52264",
+  "protocol": {
+    "ad_calibration_fraction": 0.3,
+    "ad_calibration_min": 10,
+    "separate_scale_threshold_min": 10,
+    "split_salt": "hybridad-split-v1"
+  }
+}

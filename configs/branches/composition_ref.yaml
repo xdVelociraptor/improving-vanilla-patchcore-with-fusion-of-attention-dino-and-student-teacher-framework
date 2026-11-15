@@ -1,0 +1,34 @@
+# Composition / layout evidence: Part-Occupancy Composition Memory (this project's own design).
+# All values below are PRE-REGISTERED engineering choices fixed before any test evaluation; they were
+# set from dataset documentation priors (which categories have fixed layouts / free arrangement),
+# not from test images.
+branch: composition
+variant: composition_ref
+encoder: dinov2_vitb14_reg4
+pos_interp: dinomaly
+feature_layer: 11               # zero-based; final-norm patch tokens
+pca_dim: 64
+n_clusters: 10
+tau: 0.05                       # soft-assignment temperature on cosine similarities
+kmeans_restarts: 4
+fit_token_subsample: 100000
+groups: {mass: true, appearance: true, layout: true, adjacency: true, counts: false}
+layout_grid: 4                  # 4x4 cells over the valid content region
+min_presence_cells: 2.0         # soft mass (in cells) for a cluster to count as present
+min_valid_cells: 16
+count_min_cells: 3              # only used if counts are enabled
+knn: 3                          # mean joint distance to the 3 nearest normal FIT images
+min_valid_fraction: 0.5
+cache: true
+primary_score: joint_knn
+disable_for:
+  textures: true                # component/count rules are meaningless for texture categories
+category_overrides:             # free arrangement / random rotation: absolute layout disabled
+  mvtec_ad:
+    screw: {groups: {layout: false}}
+    hazelnut: {groups: {layout: false}}
+  mvtec_loco:
+    screw_bag: {groups: {layout: false}}
+transform:
+  mvtec_ad: {kind: resize_square, size: 448, normalize: imagenet}
+  mvtec_loco: {kind: letterbox, size: 448, normalize: imagenet}

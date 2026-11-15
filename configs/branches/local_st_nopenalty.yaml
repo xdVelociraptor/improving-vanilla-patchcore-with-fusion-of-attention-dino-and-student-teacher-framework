@@ -1,0 +1,4 @@
+# ABLATION: local student-teacher without the generic-image penalty term. Not the full reference objective.
+extends: [local_st_ref.yaml]
+variant: local_st_nopenalty
+penalty: none

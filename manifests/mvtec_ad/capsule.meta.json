@@ -1,0 +1,19 @@
+{
+  "calibration_reuse": false,
+  "category": "capsule",
+  "counts": {
+    "calib_scale": 22,
+    "calib_threshold": 22,
+    "fit": 175,
+    "test": 132
+  },
+  "dataset": "mvtec_ad",
+  "duplicate_groups": [],
+  "manifest_sha256": "bc2c0f40b3cb1c4bddfdeabba7e987bc8e4261c50fc7c46617708d9a7e015980",
+  "protocol": {
+    "ad_calibration_fraction": 0.2,
+    "ad_calibration_min": 10,
+    "separate_scale_threshold_min": 40,
+    "split_salt": "hybridad-split-v1"
+  }
+}

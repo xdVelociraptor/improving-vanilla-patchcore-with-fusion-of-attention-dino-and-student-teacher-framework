@@ -1,0 +1,19 @@
+{
+  "calibration_reuse": false,
+  "category": "screw_bag",
+  "counts": {
+    "calib_scale": 30,
+    "calib_threshold": 30,
+    "fit": 360,
+    "test": 341
+  },
+  "dataset": "mvtec_loco",
+  "duplicate_groups": [],
+  "manifest_sha256": "d6fcb231db8cf7551eb8e627c827c1479a784d2f5606d94540c21cc9a81edae0",
+  "protocol": {
+    "ad_calibration_fraction": 0.2,
+    "ad_calibration_min": 10,
+    "separate_scale_threshold_min": 40,
+    "split_salt": "hybridad-split-v1"
+  }
+}

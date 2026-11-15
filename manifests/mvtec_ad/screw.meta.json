@@ -1,0 +1,19 @@
+{
+  "calibration_reuse": false,
+  "category": "screw",
+  "counts": {
+    "calib_scale": 32,
+    "calib_threshold": 32,
+    "fit": 256,
+    "test": 160
+  },
+  "dataset": "mvtec_ad",
+  "duplicate_groups": [],
+  "manifest_sha256": "0628de142b9c5aa8f8477acb460e55c88bdb598f4c163760e943cf962c050253",
+  "protocol": {
+    "ad_calibration_fraction": 0.2,
+    "ad_calibration_min": 10,
+    "separate_scale_threshold_min": 40,
+    "split_salt": "hybridad-split-v1"
+  }
+}

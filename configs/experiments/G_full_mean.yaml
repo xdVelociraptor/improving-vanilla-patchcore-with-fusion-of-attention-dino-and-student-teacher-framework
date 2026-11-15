@@ -1,0 +1,11 @@
+extends:
+- ../base.yaml
+experiment:
+  name: G_full_mean
+  description: Full model, equal-weight mean fusion (ablation)
+  branches:
+    patchcore: branches/patchcore_ref.yaml
+    local_st: branches/local_st_ref.yaml
+    global_attention: branches/dino_recon_ref.yaml
+    composition: branches/composition_ref.yaml
+  fusion: mean

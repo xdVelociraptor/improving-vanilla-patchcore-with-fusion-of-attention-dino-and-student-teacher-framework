@@ -1,0 +1,8 @@
+extends:
+- ../base.yaml
+experiment:
+  name: B_local_st_nopenalty
+  description: Local ST without generic-image penalty (ablation, not full objective)
+  branches:
+    local_st: branches/local_st_nopenalty.yaml
+  fusion: max

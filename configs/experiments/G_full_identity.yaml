@@ -1,0 +1,11 @@
+extends:
+- ../base.yaml
+experiment:
+  name: G_full_identity
+  description: Full model with no-token-mixing decoder (ablation)
+  branches:
+    patchcore: branches/patchcore_ref.yaml
+    local_st: branches/local_st_ref.yaml
+    global_attention: branches/dino_recon_identity.yaml
+    composition: branches/composition_ref.yaml
+  fusion: max

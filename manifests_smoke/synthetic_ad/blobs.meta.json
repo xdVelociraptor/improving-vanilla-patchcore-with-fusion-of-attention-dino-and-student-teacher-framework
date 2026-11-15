@@ -1,0 +1,19 @@
+{
+  "calibration_reuse": false,
+  "category": "blobs",
+  "counts": {
+    "calib_scale": 6,
+    "calib_threshold": 6,
+    "fit": 28,
+    "test": 20
+  },
+  "dataset": "synthetic_ad",
+  "duplicate_groups": [],
+  "manifest_sha256": "7cac0d4e96205c07afc0afefbbc995754cf30872538ad30d2125a6c04fb7c936",
+  "protocol": {
+    "ad_calibration_fraction": 0.3,
+    "ad_calibration_min": 10,
+    "separate_scale_threshold_min": 10,
+    "split_salt": "hybridad-split-v1"
+  }
+}

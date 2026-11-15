@@ -1,0 +1,19 @@
+{
+  "calibration_reuse": false,
+  "category": "cable",
+  "counts": {
+    "calib_scale": 23,
+    "calib_threshold": 22,
+    "fit": 179,
+    "test": 150
+  },
+  "dataset": "mvtec_ad",
+  "duplicate_groups": [],
+  "manifest_sha256": "f4d79ac8c48def8abe16366cda78c98cd3f95f70d2310eff23c9df1136393199",
+  "protocol": {
+    "ad_calibration_fraction": 0.2,
+    "ad_calibration_min": 10,
+    "separate_scale_threshold_min": 40,
+    "split_salt": "hybridad-split-v1"
+  }
+}

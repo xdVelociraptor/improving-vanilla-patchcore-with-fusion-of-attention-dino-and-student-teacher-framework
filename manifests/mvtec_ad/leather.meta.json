@@ -1,0 +1,19 @@
+{
+  "calibration_reuse": false,
+  "category": "leather",
+  "counts": {
+    "calib_scale": 25,
+    "calib_threshold": 24,
+    "fit": 196,
+    "test": 124
+  },
+  "dataset": "mvtec_ad",
+  "duplicate_groups": [],
+  "manifest_sha256": "cc29f3279ea978f60777a2a308939c726815946fc1f1be5690033171a6c8746e",
+  "protocol": {
+    "ad_calibration_fraction": 0.2,
+    "ad_calibration_min": 10,
+    "separate_scale_threshold_min": 40,
+    "split_salt": "hybridad-split-v1"
+  }
+}

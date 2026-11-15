@@ -1,0 +1,3 @@
+# ABLATION of the pooled FRACTION only (same model/scores as dino_recon_ref).
+extends: [dino_recon_ref.yaml]
+primary_score: grid_top5pct

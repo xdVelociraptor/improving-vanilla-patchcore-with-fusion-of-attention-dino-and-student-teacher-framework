@@ -1,0 +1,4 @@
+# Separately named variant: PatchCore paper Eq. 7 neighbourhood re-weighting of the image score
+# (absent from the author code). b = 9 is an ASSUMED value. Same memory and score files as patchcore_ref.
+extends: [patchcore_ref.yaml]
+primary_score: paper_reweighted_b9

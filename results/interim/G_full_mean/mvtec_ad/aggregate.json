@@ -1,0 +1,40 @@
+{
+  "categories": [
+    "bottle",
+    "cable",
+    "capsule",
+    "carpet",
+    "grid",
+    "hazelnut",
+    "metal_nut",
+    "pill",
+    "screw",
+    "tile",
+    "toothbrush",
+    "transistor",
+    "wood"
+  ],
+  "confirmatory_configuration": true,
+  "dataset": "mvtec_ad",
+  "experiment": "G_full_mean",
+  "label": "INTERIM (partial): categories finished so far; final evaluation pending",
+  "macro_auroc": 0.9962866366192569,
+  "n_categories": 13,
+  "note": "fields other than AUROC-related ones were removed from this copy after the evaluation; values kept here are unchanged, and binding hashes refer to the original records",
+  "per_category_auroc": {
+    "bottle": 1.0,
+    "cable": 0.9958770614692654,
+    "capsule": 0.9892301555644196,
+    "carpet": 0.9987961476725522,
+    "grid": 1.0,
+    "hazelnut": 1.0,
+    "metal_nut": 0.9995112414467253,
+    "pill": 0.9961811238406983,
+    "screw": 0.9918015986882558,
+    "tile": 1.0,
+    "toothbrush": 1.0,
+    "transistor": 0.9820833333333333,
+    "wood": 0.9982456140350877
+  },
+  "pooled_auroc_of_fused_scores": 0.9835806427912908
+}

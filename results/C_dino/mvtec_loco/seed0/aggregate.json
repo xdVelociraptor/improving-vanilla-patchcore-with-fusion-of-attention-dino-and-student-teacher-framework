@@ -1,0 +1,31 @@
+{
+  "categories_evaluated": [
+    "breakfast_box",
+    "juice_bottle",
+    "pushpins",
+    "screw_bag",
+    "splicing_connectors"
+  ],
+  "categories_failed": {},
+  "categories_missing": [],
+  "dataset": "mvtec_loco",
+  "evaluation_status": {
+    "confirmatory": true,
+    "reasons": []
+  },
+  "experiment": "C_dino",
+  "fusion": "max",
+  "macro_auroc": 0.7894154244212679,
+  "macro_auroc_balanced_logical_structural": 0.8041558152784349,
+  "macro_auroc_logical": 0.7207715400667306,
+  "macro_auroc_structural": 0.8875400904901388,
+  "macro_branch_auroc__composition": null,
+  "macro_branch_auroc__global_attention": 0.7894154244212679,
+  "macro_branch_auroc__local_st": null,
+  "macro_branch_auroc__patchcore": null,
+  "note": "fields other than AUROC-related ones were removed from this copy after the evaluation; values kept here are unchanged, and binding hashes refer to the original records",
+  "partial_run": false,
+  "pooled_auroc_of_fused_scores": 0.7899802968606331,
+  "pooled_note": "pooled AUROC ranks standardized fused scores across categories and is reported only as a labelled secondary number; the macro mean over categories is the primary summary",
+  "seed": 0
+}
