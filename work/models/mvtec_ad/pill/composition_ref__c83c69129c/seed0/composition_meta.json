@@ -1,0 +1,67 @@
+{
+  "appearance_fallback": 0.10217410326004028,
+  "cluster_mean_mass_on_fit": [
+    0.08587213605642319,
+    0.18783371150493622,
+    0.08802802860736847,
+    0.09385159611701965,
+    0.09025905281305313,
+    0.11413583904504776,
+    0.10292456299066544,
+    0.08302539587020874,
+    0.09627882391214371,
+    0.05779043957591057
+  ],
+  "clusters_never_present": [],
+  "fit_failures": [],
+  "groups": [
+    "mass",
+    "appearance",
+    "layout",
+    "adjacency"
+  ],
+  "manifest_sha256": "e77f94520b3c49a37b00dfcb6bb28b4a29453e35d16ff6e861537eb40a49f27c",
+  "n_memory": 214,
+  "pca_explained_variance": 0.9254762530326843,
+  "scales": {
+    "adjacency": 0.337168155891266,
+    "appearance": 0.014257089234888554,
+    "layout": 4.515358261660551,
+    "mass": 0.057406991720199585
+  },
+  "signature": {
+    "cfg": {
+      "count_min_cells": 3,
+      "feature_layer": 11,
+      "fit_token_subsample": 100000,
+      "groups": {
+        "adjacency": true,
+        "appearance": true,
+        "counts": false,
+        "layout": true,
+        "mass": true
+      },
+      "kmeans_restarts": 4,
+      "knn": 3,
+      "layout_grid": 4,
+      "min_presence_cells": 2.0,
+      "min_valid_cells": 16,
+      "n_clusters": 10,
+      "pca_dim": 64,
+      "pos_interp": "dinomaly",
+      "tau": 0.05
+    },
+    "fit_ids": "c8a55dff89291d17d753cc90a6e2708a7423849bd8ef2839153df0c7ae1a8147",
+    "seed": 0,
+    "transform": {
+      "crop": null,
+      "kind": "resize_square",
+      "normalize": "imagenet",
+      "pad_fill": "imagenet_mean",
+      "resample": "PIL_BILINEAR",
+      "size": 448
+    }
+  },
+  "state_sha256": "ca137bcf7891b4e99d858d0aca2bb814525268295ee90e6abdd26fd9fdafdbee",
+  "terminology": "visual clusters / occupancy descriptors (semantic part consistency not verified)"
+}

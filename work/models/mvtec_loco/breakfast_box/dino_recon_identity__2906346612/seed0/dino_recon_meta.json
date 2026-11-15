@@ -1,0 +1,93 @@
+{
+  "checkpoint_selection": "final iteration of a fixed schedule (no test-based selection)",
+  "encoder_fingerprint": "3e767ad875f0c916312d5b5f82e58154f4534c2e817520257e047ab53dc8fbed",
+  "grid_hw": [
+    32,
+    32
+  ],
+  "head_sha256": "96fab2e354ec04b400fd7697fa177f774c37e691988aff09658e262861c87d60",
+  "iterations": 5000,
+  "manifest_sha256": "4ea1fe87e8af307f3d219cf55947b5e14ad3c194f247157203c478bab30f40ef",
+  "n_fit_images": 351,
+  "n_trainable_params": 61425408,
+  "resumed_from": 0,
+  "signature": {
+    "cfg": {
+      "batch_size": 16,
+      "decoder_precision": "fp32",
+      "encoder_cache": true,
+      "encoder_precision": "fp32",
+      "eps": 1e-08,
+      "final_lr": 0.0002,
+      "fuse_layer_decoder": [
+        [
+          0,
+          1,
+          2,
+          3
+        ],
+        [
+          4,
+          5,
+          6,
+          7
+        ]
+      ],
+      "fuse_layer_encoder": [
+        [
+          0,
+          1,
+          2,
+          3
+        ],
+        [
+          4,
+          5,
+          6,
+          7
+        ]
+      ],
+      "grad_clip": 0.1,
+      "head": {
+        "attention": "identity",
+        "bottleneck_dropout": 0.2,
+        "depth": 8,
+        "heads": 12,
+        "width": 768
+      },
+      "hm_factor": 0.1,
+      "hm_p_final": 0.9,
+      "hm_warmup_iters": 1000,
+      "iterations": 5000,
+      "lr": 0.002,
+      "mask_loss": true,
+      "matmul_precision": "tf32",
+      "min_valid_fraction": 0.5,
+      "pos_interp": "dinomaly",
+      "target_layers": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "warmup_iters": 100,
+      "weight_decay": 0.0001
+    },
+    "encoder_sha256": "73182a088cf94833c94b1666d1c99e02fe87e2007bff57b564fb6206e25dba71",
+    "fit_ids": "96a5a9f13fdf813fed1fd54f1b56491b69550507080fcc5b5f84fc16237b507e",
+    "seed": 0,
+    "transform": {
+      "crop": null,
+      "kind": "letterbox",
+      "normalize": "imagenet",
+      "pad_fill": "imagenet_mean",
+      "resample": "PIL_BILINEAR",
+      "size": 448
+    }
+  },
+  "train_seconds_this_session": 3530.5250091552734
+}

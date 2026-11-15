@@ -1,0 +1,37 @@
+{
+  "coreset_percentage": 0.1,
+  "coreset_seed": 0,
+  "distance": "squared_euclidean (faiss IndexFlatL2 convention)",
+  "feature_signature": {
+    "layers": [
+      "layer2",
+      "layer3"
+    ],
+    "patchsize": 3,
+    "precision": "fp32",
+    "pretrain_dim": 1024,
+    "stride": 1,
+    "target_dim": 1024,
+    "transform": {
+      "crop": 224,
+      "kind": "resize_crop",
+      "normalize": "imagenet",
+      "pad_fill": "imagenet_mean",
+      "resample": "PIL_BILINEAR",
+      "size": 256
+    },
+    "weights_sha256": "95faca4d11227dddf8633dbb5ff6c8a9003c1aa5b8945c73834b8007b10950b8"
+  },
+  "fit_rel_ids_sha": "40040a3a488575d250eb9fdfd3eb3409412b4026241e370ecd2b473fc2a02186",
+  "grid_hw": [
+    28,
+    28
+  ],
+  "image_aggregation": "max over valid patches",
+  "manifest_sha256": "0628de142b9c5aa8f8477acb460e55c88bdb598f4c163760e943cf962c050253",
+  "memory_bank_sha256": "8af9306b5173b6b9e9916d32ee43a5fd04d26c3685b6a5dfb149db678bf50bd4",
+  "min_valid_fraction": 0.5,
+  "n_fit_images": 256,
+  "n_fit_patches": 200704,
+  "n_memory": 20070
+}

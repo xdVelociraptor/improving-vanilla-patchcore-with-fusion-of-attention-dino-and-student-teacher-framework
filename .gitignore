@@ -2,8 +2,12 @@
 /data/
 /external_data/
 /weights/
-/work/
-/runs/
+/work/**
+!/work/**/
+!/work/**/*.json
+!/work/README.md
+/runs/**
+!/runs/PREREGISTRATION_CHANGELOG.md
 /runs_rerun/
 /runs_check/
 /logs/
@@ -11,7 +15,6 @@
 /docs/environment.json
 /docs/figures/composition_clusters_breakfast_box.png
 /kutty dinosaur.pdf
-/visualiser.html
 
 # Local Python environments and build outputs
 .venv*/

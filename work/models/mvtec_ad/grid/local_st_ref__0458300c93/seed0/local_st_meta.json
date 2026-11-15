@@ -1,0 +1,41 @@
+{
+  "manifest_sha256": "c48aeae2c3ac0d4c8cdf38de2f442f3ce54bec48ef1cb9d176b10155be5409b2",
+  "n_fit_images": 211,
+  "penalty": "imagenette",
+  "receptive_field": [
+    33,
+    33
+  ],
+  "resumed_from_step": 0,
+  "signature": {
+    "cfg": {
+      "hard_quantile": 0.999,
+      "lr": 0.0001,
+      "lr_gamma": 0.1,
+      "lr_schedule_unit": "step",
+      "lr_step_fraction": 0.95,
+      "min_valid_fraction": 0.5,
+      "pdn": "small",
+      "penalty": "imagenette",
+      "student_out_channels": 384,
+      "train_steps": 70000,
+      "weight_decay": 1e-05
+    },
+    "fit_ids": "5767940203994d43b5bf248d53cb1ce94cb9fe80b064249b6b9a4205533b2a8a",
+    "seed": 0,
+    "teacher_sha256": "a16ded54719674435576aee641152616a640dfc6dc2b83115dab6e226610ae7d",
+    "transform": {
+      "crop": null,
+      "kind": "resize_square",
+      "normalize": "none",
+      "pad_fill": "imagenet_mean",
+      "resample": "PIL_BILINEAR",
+      "size": 256
+    }
+  },
+  "steps": 70000,
+  "stride": 4,
+  "student_sha256": "08831a15bae9b57071a5d1af1f198e6f3707032eb10d5cdd3ae4fe451d03a6e1",
+  "teacher_fingerprint": "cd7de6f8bb2e46b526a113092f4525fe9eb3d33bc0fe1c14fe0301baef602154",
+  "train_seconds_this_session": 1792.2827718257904
+}

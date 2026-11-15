@@ -1,0 +1,93 @@
+{
+  "checkpoint_selection": "final iteration of a fixed schedule (no test-based selection)",
+  "encoder_fingerprint": "3e767ad875f0c916312d5b5f82e58154f4534c2e817520257e047ab53dc8fbed",
+  "grid_hw": [
+    32,
+    32
+  ],
+  "head_sha256": "cff0869790ea1a9a59cea0ff746333544f83a2edf615d16d9f66cfd0687cba85",
+  "iterations": 5000,
+  "manifest_sha256": "fb688b9d329a6f27b8ed510de825d516d90c222314f5d58526a223de0b5fb412",
+  "n_fit_images": 167,
+  "n_trainable_params": 61425408,
+  "resumed_from": 0,
+  "signature": {
+    "cfg": {
+      "batch_size": 16,
+      "decoder_precision": "fp32",
+      "encoder_cache": true,
+      "encoder_precision": "fp32",
+      "eps": 1e-08,
+      "final_lr": 0.0002,
+      "fuse_layer_decoder": [
+        [
+          0,
+          1,
+          2,
+          3
+        ],
+        [
+          4,
+          5,
+          6,
+          7
+        ]
+      ],
+      "fuse_layer_encoder": [
+        [
+          0,
+          1,
+          2,
+          3
+        ],
+        [
+          4,
+          5,
+          6,
+          7
+        ]
+      ],
+      "grad_clip": 0.1,
+      "head": {
+        "attention": "linear",
+        "bottleneck_dropout": 0.2,
+        "depth": 8,
+        "heads": 12,
+        "width": 768
+      },
+      "hm_factor": 0.1,
+      "hm_p_final": 0.9,
+      "hm_warmup_iters": 1000,
+      "iterations": 5000,
+      "lr": 0.002,
+      "mask_loss": true,
+      "matmul_precision": "tf32",
+      "min_valid_fraction": 0.5,
+      "pos_interp": "dinomaly",
+      "target_layers": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "warmup_iters": 100,
+      "weight_decay": 0.0001
+    },
+    "encoder_sha256": "73182a088cf94833c94b1666d1c99e02fe87e2007bff57b564fb6206e25dba71",
+    "fit_ids": "3a3fd31194ffe5b3e6ad969a32129dcc74cba18425515234c5e1960617944c3b",
+    "seed": 0,
+    "transform": {
+      "crop": null,
+      "kind": "resize_square",
+      "normalize": "imagenet",
+      "pad_fill": "imagenet_mean",
+      "resample": "PIL_BILINEAR",
+      "size": 448
+    }
+  },
+  "train_seconds_this_session": 3326.8230044841766
+}

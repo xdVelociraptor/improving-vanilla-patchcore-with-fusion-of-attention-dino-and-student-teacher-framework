@@ -1,0 +1,94 @@
+{
+  "appearance_fallback": 0.3145335912704468,
+  "cluster_mean_mass_on_fit": [
+    0.10311976820230484,
+    0.1612255573272705,
+    0.1040896624326706,
+    0.08865617960691452,
+    0.07603554427623749,
+    0.09726346284151077,
+    0.10293007642030716,
+    0.10973026603460312,
+    0.040680985897779465,
+    0.11626699566841125
+  ],
+  "count_gating": {
+    "agreement": [
+      0.117,
+      0.153,
+      0.114,
+      0.719,
+      0.139,
+      0.225,
+      0.139,
+      0.133,
+      0.644,
+      0.147
+    ],
+    "clusters_with_count_evidence": [],
+    "modal_count": [
+      16.0,
+      13.0,
+      18.0,
+      1.0,
+      16.0,
+      3.0,
+      6.0,
+      21.0,
+      1.0,
+      8.0
+    ]
+  },
+  "fit_failures": [],
+  "groups": [
+    "mass",
+    "appearance",
+    "adjacency",
+    "counts"
+  ],
+  "manifest_sha256": "d6fcb231db8cf7551eb8e627c827c1479a784d2f5606d94540c21cc9a81edae0",
+  "n_memory": 360,
+  "pca_explained_variance": 0.894629180431366,
+  "scales": {
+    "adjacency": 0.289942693612669,
+    "appearance": 0.02376408316195011,
+    "counts": 1.0,
+    "mass": 0.05599258840084076
+  },
+  "signature": {
+    "cfg": {
+      "count_min_cells": 3,
+      "feature_layer": 11,
+      "fit_token_subsample": 100000,
+      "groups": {
+        "adjacency": true,
+        "appearance": true,
+        "counts": true,
+        "layout": false,
+        "mass": true
+      },
+      "kmeans_restarts": 4,
+      "knn": 3,
+      "layout_grid": 4,
+      "min_presence_cells": 2.0,
+      "min_valid_cells": 16,
+      "n_clusters": 10,
+      "pca_dim": 64,
+      "pos_interp": "dinomaly",
+      "tau": 0.05
+    },
+    "fit_ids": "fbd4031c8b6c28ad95d592680b99652e055ae4ed6a84ae2c9a0d45bc2c46da52",
+    "seed": 0,
+    "transform": {
+      "crop": null,
+      "kind": "letterbox",
+      "normalize": "imagenet",
+      "pad_fill": "imagenet_mean",
+      "resample": "PIL_BILINEAR",
+      "size": 896
+    }
+  },
+  "state_sha256": "932788598291198ca683c1f80f2aeccbadef5dc9512cb19e05623d7014b3ae86",
+  "terminology": "visual clusters / occupancy descriptors (semantic part consistency not verified)",
+  "variant": "EXPLORATORY composition_hr (X3)"
+}

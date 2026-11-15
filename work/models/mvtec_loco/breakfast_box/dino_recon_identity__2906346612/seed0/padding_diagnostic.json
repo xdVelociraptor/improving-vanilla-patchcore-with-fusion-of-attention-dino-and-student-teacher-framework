@@ -1,0 +1,11 @@
+{
+  "applicable": true,
+  "fill_alternative": "black",
+  "fill_default": "imagenet_mean",
+  "mean_map_border_cells": 0.015311414375901222,
+  "mean_map_interior_cells": 0.036906760185956955,
+  "median_relative_score_change": 0.135563313264856,
+  "n_images": 62,
+  "note": "normal calibration images only; no labels used",
+  "spearman_default_vs_black_fill": 0.6082193850570371
+}

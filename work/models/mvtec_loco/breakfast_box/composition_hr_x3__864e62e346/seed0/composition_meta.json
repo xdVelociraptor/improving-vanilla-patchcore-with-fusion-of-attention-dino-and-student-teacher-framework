@@ -1,0 +1,98 @@
+{
+  "appearance_fallback": 0.0573817677795887,
+  "cluster_mean_mass_on_fit": [
+    0.06854280829429626,
+    0.19567885994911194,
+    0.10417088121175766,
+    0.07436757534742355,
+    0.13364878296852112,
+    0.10484861582517624,
+    0.09268131852149963,
+    0.10877157002687454,
+    0.05660683661699295,
+    0.06068118289113045
+  ],
+  "count_gating": {
+    "agreement": [
+      0.137,
+      0.707,
+      0.635,
+      0.174,
+      0.171,
+      0.464,
+      0.239,
+      0.746,
+      0.752,
+      0.991
+    ],
+    "clusters_with_count_evidence": [
+      9
+    ],
+    "modal_count": [
+      21.0,
+      1.0,
+      1.0,
+      19.0,
+      14.0,
+      2.0,
+      5.0,
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  "fit_failures": [],
+  "groups": [
+    "mass",
+    "appearance",
+    "layout",
+    "adjacency",
+    "counts"
+  ],
+  "manifest_sha256": "4ea1fe87e8af307f3d219cf55947b5e14ad3c194f247157203c478bab30f40ef",
+  "n_memory": 351,
+  "pca_explained_variance": 0.9270613193511963,
+  "scales": {
+    "adjacency": 0.17439683561232786,
+    "appearance": 0.00586081063374877,
+    "counts": 0.016996336997336995,
+    "layout": 2.2567224047126375,
+    "mass": 0.037433505058288574
+  },
+  "signature": {
+    "cfg": {
+      "count_min_cells": 3,
+      "feature_layer": 11,
+      "fit_token_subsample": 100000,
+      "groups": {
+        "adjacency": true,
+        "appearance": true,
+        "counts": true,
+        "layout": true,
+        "mass": true
+      },
+      "kmeans_restarts": 4,
+      "knn": 3,
+      "layout_grid": 4,
+      "min_presence_cells": 2.0,
+      "min_valid_cells": 16,
+      "n_clusters": 10,
+      "pca_dim": 64,
+      "pos_interp": "dinomaly",
+      "tau": 0.05
+    },
+    "fit_ids": "96a5a9f13fdf813fed1fd54f1b56491b69550507080fcc5b5f84fc16237b507e",
+    "seed": 0,
+    "transform": {
+      "crop": null,
+      "kind": "letterbox",
+      "normalize": "imagenet",
+      "pad_fill": "imagenet_mean",
+      "resample": "PIL_BILINEAR",
+      "size": 896
+    }
+  },
+  "state_sha256": "0f875f81dc7eb4a2fc98a748d6e5e4e60873cbdca048c20d9e8a28ffcc313d46",
+  "terminology": "visual clusters / occupancy descriptors (semantic part consistency not verified)",
+  "variant": "EXPLORATORY composition_hr (X3)"
+}

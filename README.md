@@ -6,6 +6,8 @@ Research code for image and pixel anomaly detection on the original MVTec AD and
 - [Historical AUROC results](docs/RESULTS.md) and [machine-readable summary tables](results/)
 - [X3 exploratory experiments](docs/X3.md)
 - [Architecture diagrams](architecture.html)
+- [Interactive results viewer](visualiser.html) and [pre-registration changelog](runs/PREREGISTRATION_CHANGELOG.md)
+- [Model metadata and excluded artifacts](work/README.md)
 - [Dataset, model and code sources and terms](DATA_AND_LICENSES.md)
 
 ## Headline results (seed 0, image-level AUROC)

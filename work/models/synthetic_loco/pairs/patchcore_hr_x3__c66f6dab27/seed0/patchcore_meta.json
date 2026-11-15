@@ -1,0 +1,38 @@
+{
+  "coreset_percentage": 0.01,
+  "coreset_seed": 0,
+  "distance": "squared_euclidean",
+  "feature_signature": {
+    "layers": [
+      "layer2",
+      "layer3"
+    ],
+    "patchsize": 3,
+    "precision": "fp32",
+    "pretrain_dim": 1024,
+    "stride": 1,
+    "target_dim": 1024,
+    "transform": {
+      "crop": null,
+      "kind": "letterbox",
+      "normalize": "imagenet",
+      "pad_fill": "imagenet_mean",
+      "resample": "PIL_BILINEAR",
+      "size": 128
+    },
+    "weights_sha256": "95faca4d11227dddf8633dbb5ff6c8a9003c1aa5b8945c73834b8007b10950b8"
+  },
+  "fit_rel_ids_sha": "eb8dbd9e2cae780c0f873072f99a21e5800759c36a254d99cb1cf3761b098e38",
+  "grid_hw": [
+    16,
+    16
+  ],
+  "image_aggregation": "max over valid patches",
+  "manifest_sha256": "299cbdd191874b64c1fbecd53831d7422070578ffbc44e236c62b016c9b52264",
+  "memory_bank_sha256": "47d32e3b4604ef7c17de813cfe87a7b13853b224497e00a683bea34bf71a3f3c",
+  "min_valid_fraction": 0.5,
+  "n_fit_images": 40,
+  "n_fit_patches": 7680,
+  "n_memory": 76,
+  "variant": "EXPLORATORY patchcore_hr (X3)"
+}

@@ -1,0 +1,98 @@
+{
+  "appearance_fallback": 0.09426268935203552,
+  "cluster_mean_mass_on_fit": [
+    0.11002688854932785,
+    0.10927903652191162,
+    0.12934599816799164,
+    0.15952204167842865,
+    0.11884642392396927,
+    0.08368232846260071,
+    0.09186621755361557,
+    0.06728141754865646,
+    0.07863902300596237,
+    0.05150969326496124
+  ],
+  "count_gating": {
+    "agreement": [
+      0.125,
+      0.156,
+      1.0,
+      0.108,
+      0.122,
+      0.117,
+      0.136,
+      0.219,
+      0.714,
+      0.333
+    ],
+    "clusters_with_count_evidence": [
+      2
+    ],
+    "modal_count": [
+      7.0,
+      17.0,
+      2.0,
+      17.0,
+      26.0,
+      14.0,
+      15.0,
+      6.0,
+      0.0,
+      1.0
+    ]
+  },
+  "fit_failures": [],
+  "groups": [
+    "mass",
+    "appearance",
+    "layout",
+    "adjacency",
+    "counts"
+  ],
+  "manifest_sha256": "ef375e92fac7b598d5af58c7425b66acb200bd6cb970be7d972d975b64e7a5fa",
+  "n_memory": 360,
+  "pca_explained_variance": 0.9356878995895386,
+  "scales": {
+    "adjacency": 0.254410693349431,
+    "appearance": 0.005755726480856538,
+    "counts": 1e-12,
+    "layout": 4.778942020944225,
+    "mass": 0.04286010563373566
+  },
+  "signature": {
+    "cfg": {
+      "count_min_cells": 3,
+      "feature_layer": 11,
+      "fit_token_subsample": 100000,
+      "groups": {
+        "adjacency": true,
+        "appearance": true,
+        "counts": true,
+        "layout": true,
+        "mass": true
+      },
+      "kmeans_restarts": 4,
+      "knn": 3,
+      "layout_grid": 4,
+      "min_presence_cells": 2.0,
+      "min_valid_cells": 16,
+      "n_clusters": 10,
+      "pca_dim": 64,
+      "pos_interp": "dinomaly",
+      "tau": 0.05
+    },
+    "fit_ids": "9e482afa5cc17aed5f63a845ff6286a0acaf248dbab0b6b8fa3f98803cd2505f",
+    "seed": 0,
+    "transform": {
+      "crop": null,
+      "kind": "letterbox",
+      "normalize": "imagenet",
+      "pad_fill": "imagenet_mean",
+      "resample": "PIL_BILINEAR",
+      "size": 896
+    }
+  },
+  "state_sha256": "80dd719f448a204dba1793fd3d0e906dbd16383dbd6c2ee1290b8cf795cafbe3",
+  "terminology": "visual clusters / occupancy descriptors (semantic part consistency not verified)",
+  "variant": "EXPLORATORY composition_hr (X3)"
+}
