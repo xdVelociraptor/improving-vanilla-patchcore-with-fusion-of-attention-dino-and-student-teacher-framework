@@ -70,11 +70,11 @@ Rebuilding downloads the packages listed in `requirements.lock.txt` and replaces
 
 ### Prepare and evaluate one category
 
-Open PowerShell in the repository folder. These commands run the full G_full configuration for one MVTec AD category, `bottle`:
+Open PowerShell in the repository folder. These commands run the full G_full configuration for one MVTec AD category, `bottle`. The prepare command uses the Windows CUDA memory cap needed for DINO training:
 
 ```powershell
 .\hybridad.cmd manifests --dataset mvtec_ad --category bottle
-.\hybridad.cmd prepare --experiment experiments/G_full.yaml --dataset mvtec_ad --category bottle
+.\.venv\Scripts\python.exe .\scripts\run_capped.py --fraction 0.8 -- prepare --experiment experiments/G_full.yaml --dataset mvtec_ad --category bottle
 .\hybridad.cmd evaluate --experiment experiments/G_full.yaml --dataset mvtec_ad --category bottle --exploratory
 ```
 
@@ -83,7 +83,7 @@ Open PowerShell in the repository folder. These commands run the full G_full con
 To process every category in one dataset, omit `--category bottle`, for example:
 
 ```powershell
-.\hybridad.cmd prepare --experiment experiments/G_full.yaml --dataset mvtec_ad
+.\.venv\Scripts\python.exe .\scripts\run_capped.py --fraction 0.8 -- prepare --experiment experiments/G_full.yaml --dataset mvtec_ad
 .\hybridad.cmd evaluate --experiment experiments/G_full.yaml --dataset mvtec_ad --exploratory
 ```
 
@@ -93,7 +93,7 @@ Use `--dataset mvtec_loco` for LOCO. Use `--dataset all` to run both datasets. T
 
 The calibration calculation itself is small: it fits score normalizers and a fusion record from already saved normal-image scores. The longer step is `prepare`, which may need to train model branches and score images to create those calibration scores. Calibration-data preparation can take **about 20 minutes or longer per category** when compatible score files are not already available. DINO reconstruction training alone took about **20–57 minutes per category** in the archived runs; the full reference branches took about **87 minutes per category** on the original RTX 5070 Laptop. Timing varies with hardware, disk speed, and which outputs can be reused.
 
-The pipeline is resumable and reuses compatible saved models and score files. Keep the same checkout, configuration, dataset manifests, and `work\` folder between runs; rerunning `prepare` then skips branches whose required scores are already present. Avoid deleting `work\` or `runs_rerun\` if you want to resume. Run one GPU training job at a time, keep the PC plugged in and awake, and let the Windows DINO memory cap run as configured.
+The pipeline is resumable and reuses compatible saved models and score files. Keep the same checkout, configuration, dataset manifests, and `work\` folder between runs; rerunning `prepare` then skips branches whose required scores are already present. Avoid deleting `work\` or `runs_rerun\` if you want to resume. Run one GPU training job at a time and keep the PC plugged in and awake. The `scripts/run_capped.py --fraction 0.8` wrapper limits PyTorch CUDA cache growth on Windows and avoids WDDM spilling allocations into system RAM, which caused severe slowdowns in the original runs. Use it for DINO training as shown above.
 
 Do not lower the number of training steps, shrink images, change the calibration split, or change the normalizer quantile just to make a run faster: those changes can alter results and make them incomparable to the documented experiment. The default calibration procedure in `src/hybridad/calibration.py` does not need a speed shortcut; reusing its valid cached scores is the safe time saver.
 
