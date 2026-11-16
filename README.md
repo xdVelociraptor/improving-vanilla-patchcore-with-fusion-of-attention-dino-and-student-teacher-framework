@@ -70,24 +70,24 @@ Rebuilding downloads the packages listed in \`requirements.lock.txt\` and replac
 
 ### Point the download at your dataset folder
 
-A GitHub source download does not include the benchmark images. On this PC, the datasets are in \`%USERPROFILE%\\OneDrive\\Desktop\\datasets\`, with \`MVTecAD\` and \`MVTec_LOCO\` inside. Create the ignored, machine-local config once from PowerShell in the repository folder:
+A GitHub source download does not include the benchmark images. On this PC, the datasets are in `%USERPROFILE%\OneDrive\Desktop\datasets`, with `MVTecAD` and `MVTec_LOCO` inside. Create the ignored, machine-local config once from PowerShell in the repository folder:
 
-\`\`\`powershell
-if (Test-Path .\\configs\\local.yaml) { throw "configs/local.yaml already exists; preserve it and check its dataset paths before continuing." }
-$datasetRoot = (Join-Path $env:USERPROFILE 'OneDrive\\Desktop\\datasets').Replace('\\', '/')
-if (-not (Test-Path (Join-Path $env:USERPROFILE 'OneDrive\\Desktop\\datasets\\MVTecAD')) -or
-    -not (Test-Path (Join-Path $env:USERPROFILE 'OneDrive\\Desktop\\datasets\\MVTec_LOCO'))) {
-    throw "Expected MVTecAD and MVTec_LOCO folders under $env:USERPROFILE\\OneDrive\\Desktop\\datasets"
+```powershell
+if (Test-Path .\configs\local.yaml) { throw "configs/local.yaml already exists; preserve it and check its dataset paths before continuing." }
+$datasetRoot = (Join-Path $env:USERPROFILE 'OneDrive\Desktop\datasets').Replace('\', '/')
+if (-not (Test-Path (Join-Path $env:USERPROFILE 'OneDrive\Desktop\datasets\MVTecAD')) -or
+    -not (Test-Path (Join-Path $env:USERPROFILE 'OneDrive\Desktop\datasets\MVTec_LOCO'))) {
+    throw "Expected MVTecAD and MVTec_LOCO folders under $env:USERPROFILE\OneDrive\Desktop\datasets"
 }
 @"
 paths:
   datasets:
     mvtec_ad: "$datasetRoot/MVTecAD"
     mvtec_loco: "$datasetRoot/MVTec_LOCO"
-"@ | Set-Content -LiteralPath .\\configs\\local.yaml -Encoding utf8
-\`\`\`
+"@ | Set-Content -LiteralPath .\configs\local.yaml -Encoding utf8
+```
 
-This writes \`configs/local.yaml\`, which is ignored by Git and stays on your PC. It does not copy or upload the images. The dataset paths are used by \`hybridad\` commands, including \`prepare\`.
+This writes `configs/local.yaml`, which is ignored by Git and stays on your PC. It does not copy or upload the images. The dataset paths are used by `hybridad` commands, including `prepare`.
 
 ### Prepare and evaluate one category
 
