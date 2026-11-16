@@ -2,7 +2,7 @@
 
 This project detects defects in images from the MVTec AD and MVTec LOCO AD benchmarks. Its full model combines PatchCore, a local student–teacher model, DINOv2 reconstruction, and composition features.
 
-This README is the run guide. Start with **A. See the existing results** if you only want to inspect the completed experiment, or **B. Run the saved project on the original PC** to restore the full research archive. A GitHub clone alone does not contain the datasets, model files, saved scores, or Python environment.
+This README is the run guide. Start with **A. See the existing results** if you only want to inspect the completed experiment, or **B. Run the saved project on the original PC** to restore the full research archive. A GitHub clone alone does not contain the datasets, model files, or Python environment. An optional saved-score cache is available from the release linked below.
 
 ## A. See the existing results
 
@@ -14,7 +14,7 @@ The repository includes the reported summary tables:
 | MVTec LOCO AD, 5 categories | G_full | macro image AUROC 0.860 | Confirmatory historical result |
 | MVTec LOCO AD, 5 categories | X3_mean | macro image AUROC 0.885 | Exploratory historical result |
 
-Read [the detailed results and caveats](docs/RESULTS.md). Once the full archive is restored, you can regenerate a report from its saved outputs:
+Read [the detailed results and caveats](docs/RESULTS.md). To download the optional precomputed score cache, use the [Saved anomaly-score cache release](https://github.com/xdVelociraptor/improving-vanilla-patchcore-with-fusion-of-attention-dino-and-student-teacher-framework/releases/tag/score-cache-2026-11). Extract `patchcore-score-cache.zip` at the repository root so its files land under `work/scores/`. The archive contains 188 numerical score files (about 82 MiB); it contains no images, models, weights, or Python environment. It skips work only for matching experiment settings and dataset manifests. You still need the correct datasets and dependencies. Once the full archive or a compatible score cache is available, you can regenerate a report from saved outputs:
 
 ```powershell
 .\hybridad.cmd report --out .\logs\RESULTS.generated.md
@@ -44,7 +44,7 @@ The original folder is not changed. The setup stops if it finds a different file
 powershell -NoProfile -ExecutionPolicy Bypass -File .\setup_local_archive.ps1 -Archive "D:\path\to\kutty dinosaur"
 ```
 
-The full archive is about 27 GB. GitHub contains the source code and documentation, but does not host the datasets, pretrained weights, trained checkpoints, saved score files, or Python environment.
+The full archive is about 27 GB. GitHub contains the source and documentation, and the release provides the optional numerical score cache. GitHub does not host the datasets, pretrained weights, trained checkpoints, or Python environment.
 
 ## C. Run a new experiment
 
@@ -124,7 +124,7 @@ For command options, run `.\hybridad.cmd <command> --help`, such as `.\hybridad.
    python .\scripts\verify_datasets.py
    ```
 
-5. Follow section C to prepare, evaluate, and inspect outputs. Trained artifacts and the historical saved scores are not included in a GitHub-only checkout; new models must be trained or separately restored.
+5. Follow section C to prepare, evaluate, and inspect outputs. Trained models are not included in a GitHub-only checkout and must be trained or separately restored. Historical numerical scores can be downloaded from the [Saved anomaly-score cache release](https://github.com/xdVelociraptor/improving-vanilla-patchcore-with-fusion-of-attention-dino-and-student-teacher-framework/releases/tag/score-cache-2026-11) and extracted at the repository root; check the release notes and confirm compatibility before relying on them.
 
 ## Project notes
 
