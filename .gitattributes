@@ -1,3 +1,5 @@
 # Manifest metadata records a SHA-256 of the exact CSV bytes.
 /manifests/** -text
 /manifests_smoke/** -text
+# The archive restore compares this tracked file byte-for-byte with the original copy.
+/runs/PREREGISTRATION_CHANGELOG.md text eol=lf
