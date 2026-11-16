@@ -95,8 +95,8 @@ Open PowerShell in the repository folder. These commands run the full G_full con
 
 ```powershell
 .\hybridad.cmd manifests --dataset mvtec_ad --category bottle
-.\.venv\Scripts\python.exe .\scripts\run_capped.py --fraction 0.8 -- prepare --experiment experiments/G_full.yaml --dataset mvtec_ad --category bottle
-.\hybridad.cmd evaluate --experiment experiments/G_full.yaml --dataset mvtec_ad --category bottle --exploratory
+.\.venv\Scripts\python.exe .\scripts\run_capped.py --fraction 0.8 -- prepare --experiment configs/experiments/G_full.yaml --dataset mvtec_ad --category bottle
+.\hybridad.cmd evaluate --experiment configs/experiments/G_full.yaml --dataset mvtec_ad --category bottle --exploratory
 ```
 
 `prepare` fits any missing model branches, scores the calibration and test images, and calibrates the score fusion without reading test labels. `evaluate` reads the test labels and writes the metrics. New evaluations from this source release are labelled **EXPLORATORY** because this is an AUROC-only derivative of the original preregistered code. Keep the `--exploratory` flag; it makes that status explicit.
@@ -104,8 +104,8 @@ Open PowerShell in the repository folder. These commands run the full G_full con
 To process every category in one dataset, omit `--category bottle`, for example:
 
 ```powershell
-.\.venv\Scripts\python.exe .\scripts\run_capped.py --fraction 0.8 -- prepare --experiment experiments/G_full.yaml --dataset mvtec_ad
-.\hybridad.cmd evaluate --experiment experiments/G_full.yaml --dataset mvtec_ad --exploratory
+.\.venv\Scripts\python.exe .\scripts\run_capped.py --fraction 0.8 -- prepare --experiment configs/experiments/G_full.yaml --dataset mvtec_ad
+.\hybridad.cmd evaluate --experiment configs/experiments/G_full.yaml --dataset mvtec_ad --exploratory
 ```
 
 Use `--dataset mvtec_loco` for LOCO. Use `--dataset all` to run both datasets. Training and scoring every category can take many hours.
@@ -129,7 +129,7 @@ Do not lower the number of training steps, shrink images, change the calibration
 For pixel-level localization after evaluation, run:
 
 ```powershell
-.\hybridad.cmd localize --experiment experiments/G_full.yaml --dataset mvtec_ad --category bottle
+.\hybridad.cmd localize --experiment configs/experiments/G_full.yaml --dataset mvtec_ad --category bottle
 ```
 
 For command options, run `.\hybridad.cmd <command> --help`, such as `.\hybridad.cmd prepare --help`.
