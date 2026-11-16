@@ -1,138 +1,134 @@
-# improving-vanilla-patchcore-with-fusion-of-attention-dino-and-student-teacher-framework
+# PatchCore + DINOv2 anomaly detection
 
-Research code for image and pixel anomaly detection on the original MVTec AD and MVTec LOCO AD. The pipeline combines PatchCore, a local student–teacher, DINOv2 reconstruction, and composition evidence.
+This project detects defects in images from the MVTec AD and MVTec LOCO AD benchmarks. Its full model combines PatchCore, a local student–teacher model, DINOv2 reconstruction, and composition features.
 
-- [Historical report PDF](docs/REPORT.pdf) (describes the original full archive; see this README for the source-only release)
-- [Methods and caveats](docs/METHODS.md)
-- [Historical AUROC results](docs/RESULTS.md) and [machine-readable summary tables](results/)
-- [X3 exploratory experiments](docs/X3.md)
-- [Architecture diagrams](architecture.html)
-- [Interactive results viewer](visualiser.html), [pre-registration changelog](runs/PREREGISTRATION_CHANGELOG.md), and [142-entry test-access log excerpt](docs/TEST_ACCESS_LOG_excerpt.jsonl)
-- [Model metadata and excluded artifacts](work/README.md)
-- [Dataset, model and code sources and terms](DATA_AND_LICENSES.md)
-- [Recorded experiment pre-registration](docs/PREREGISTRATION.json)
-- [Original Windows GPU environment (local paths removed)](docs/environment.json)
+This README is the run guide. Start with **A. See the existing results** if you only want to inspect the completed experiment, or **B. Run the saved project on the original PC** to restore the full research archive. A GitHub clone alone does not contain the datasets, model files, saved scores, or Python environment.
 
-## Headline results (seed 0, image-level AUROC)
+## A. See the existing results
 
-| Dataset | Model | Status | macro AUROC | pooled AUROC | logical / structural AUROC |
-|---|---|---|---|---|---|
-| MVTec AD, 15 categories | G_full (all four scores, max fusion) | confirmatory | 0.994 | 0.982 | – |
-| MVTec LOCO, 5 categories | G_full (all four scores, max fusion) | confirmatory | 0.860 | 0.854 | 0.828 / 0.912 |
-| MVTec LOCO, 5 categories | X3_mean | EXPLORATORY | 0.885 | 0.880 | 0.844 / 0.947 |
+The repository includes the reported summary tables:
 
-For historical localization, per-category AUROC and confidence intervals, see [the results](docs/RESULTS.md).
+| Dataset | Model | Result | Status |
+|---|---|---:|---|
+| MVTec AD, 15 categories | G_full | macro image AUROC 0.994 | Confirmatory historical result |
+| MVTec LOCO AD, 5 categories | G_full | macro image AUROC 0.860 | Confirmatory historical result |
+| MVTec LOCO AD, 5 categories | X3_mean | macro image AUROC 0.885 | Exploratory historical result |
 
-## One-command setup on the original Windows PC
-
-If your complete original project folder is still at `%USERPROFILE%\OneDrive\Desktop\kutty dinosaur`, download and extract this repository into a **separate** folder, then double-click `setup_local_archive.cmd`. The setup copies the original datasets, weights, trained models, score files, saved results, and Python environment into the checkout without modifying the original. It then runs the quick self-check. The original folder must have a working Python 3.12 environment and the files listed above. Allow roughly 27 GB plus 2 GB spare disk space and time for the copy.
-
-If the archive is in a different folder, run this in PowerShell from the checkout:
+Read [the detailed results and caveats](docs/RESULTS.md). Once the full archive is restored, you can regenerate a report from its saved outputs:
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\setup_local_archive.ps1 -Archive "C:\path\to\original project"
+.\hybridad.cmd report --out .\logs\RESULTS.generated.md
 ```
 
-Setup stops rather than overwriting a different existing file. If a previous quick check has left `runs_check/` or `logs/self_check.json`, preserve or move those items before rerunning setup. After it passes, run `.\hybridad.cmd --help` and use `hybridad.cmd` / `x3.cmd` as shown in the experiment guide. These wrappers select this checkout's source. On this original machine, the quick check verified weights, datasets, scores, and sample AUROC reproductions.
+Open `logs\RESULTS.generated.md` to see the report. This reads saved scores; it does not train a model or evaluate new images. Using `--out` keeps the checked-in `docs/RESULTS.md` intact.
 
-This convenience setup uses files already present on the original Windows PC; GitHub does not contain the datasets, trained checkpoints, scores, or Python environment. To use the repository on a different machine without the archive, follow the manual installation and publisher download guide below, and retrain or restore your artifacts separately. The historical full-archive check is not expected to pass without those saved artifacts.
+## B. Run the saved project on the original Windows PC
 
-## Install and check the code
+This is the quickest way to run the archived project. It uses the original research folder already on the PC and restores it into a separate checkout.
 
-Use Python 3.12. For a CPU or platform-default setup, create and activate a virtual environment, then install the package and test dependencies:
+**On the original PC, this restore has already been done:** use the separate checkout in `Documents\Codex\patchcore-run`. Do not copy the archive again unless you are setting up a different checkout.
 
-```shell
-python -m venv .venv
-# Windows PowerShell: .\.venv\Scripts\Activate.ps1
-# Linux/macOS: source .venv/bin/activate
-python -m pip install -e ".[test,faiss]"
-python -m hybridad.cli --help
-python -m pytest -q
+1. Download the repository ZIP from GitHub and extract it to a new folder. Do not extract it over the original `kutty dinosaur` folder.
+2. Make sure the original folder is at `%USERPROFILE%\OneDrive\Desktop\kutty dinosaur` and that the C: drive has about **29 GB free** (the copy is about 27 GB, plus 2 GB spare).
+3. Double-click `setup_local_archive.cmd` in the extracted repository and let it finish. It copies the datasets, pretrained weights, trained models, saved scores, results, and Python environment, then runs the quick check. The copy can take several minutes.
+4. When it reports `ALL CHECKS PASSED`, open PowerShell in the extracted repository folder and run:
+
+   ```powershell
+   .\hybridad.cmd --help
+   .\hybridad.cmd report --out .\logs\RESULTS.generated.md
+   ```
+
+The original folder is not changed. The setup stops if it finds a different file where it needs to copy one. It also stops if `runs_check\` or `logs\self_check.json` already exists, so it cannot overwrite a previous check. For a fresh attempt, use a fresh repository extraction. If the archive is stored elsewhere, open PowerShell in the extracted folder and run:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\setup_local_archive.ps1 -Archive "D:\path\to\kutty dinosaur"
 ```
 
-The pytest suite can run without the original images or pretrained weights. Weight-dependent tests skip when their inputs are absent. The tests marked `data` check the copied split manifests and do not load the images. The CLI `smoke` workflow exercises real branches on synthetic images and can still require pretrained weights.
+The full archive is about 27 GB. GitHub contains the source code and documentation, but does not host the datasets, pretrained weights, trained checkpoints, saved score files, or Python environment.
 
-If FAISS is unavailable on your platform, install with `python -m pip install -e ".[test]"` and run `python -m pytest -q -m "not reference"`. This omits the PatchCore comparison that needs FAISS. Install FAISS for the reference experiment configuration below.
+## C. Run a new experiment
 
-For the original Python 3.12.10 and PyTorch CUDA 12.8 environment on Windows, run `.\setup_env.ps1`. The original package versions are listed in `requirements.lock.txt`. `bash setup_env.sh` attempts the same pinned environment on Linux where matching wheels are available. Use the package's default dependencies above if you do not need the original CUDA build.
+### Requirements and inputs
 
-## Reproduce an experiment
+- Windows and Python 3.12 are the documented environment. The original tested machine used Python 3.12.10, PyTorch with CUDA 12.8, and an NVIDIA RTX 5070 Laptop GPU with 8 GB VRAM.
+- You need the original MVTec AD and/or MVTec LOCO AD images, pretrained model weights, and Imagenette for the local student–teacher penalty branch. Download these from their publishers and put them in the locations in [DATA_AND_LICENSES.md](DATA_AND_LICENSES.md). Review the dataset terms before using or redistributing the files.
+- If you restored the original archive using section B, these inputs and the original `.venv` are already in the checkout.
 
-1. Download the original datasets and pretrained weights using [the source and layout guide](DATA_AND_LICENSES.md). Keep the archives as separate inputs. Leave image names and directories unchanged.
-2. From the project root, use the following command to verify the tracked image checksums. To use data stored elsewhere, pass `--ad-root` and `--loco-root`, and configure the same locations for the pipeline via `configs/local.yaml` (copy `configs/local.example.yaml`) or `HYBRIDAD_MVTEC_AD` and `HYBRIDAD_MVTEC_LOCO`.
+To rebuild the pinned CUDA environment on Windows if needed:
 
-   ```shell
-   python scripts/verify_datasets.py
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\setup_env.ps1
+```
+
+If the existing `.venv` is broken or the checkout was moved to another PC, rebuild it with:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\setup_env.ps1 -Rebuild
+```
+
+Rebuilding downloads the packages listed in `requirements.lock.txt` and replaces only the checkout's `.venv` folder.
+
+### Prepare and evaluate one category
+
+Open PowerShell in the repository folder. These commands run the full G_full configuration for one MVTec AD category, `bottle`:
+
+```powershell
+.\hybridad.cmd manifests --dataset mvtec_ad --category bottle
+.\hybridad.cmd prepare --experiment experiments/G_full.yaml --dataset mvtec_ad --category bottle
+.\hybridad.cmd evaluate --experiment experiments/G_full.yaml --dataset mvtec_ad --category bottle --exploratory
+```
+
+`prepare` fits any missing model branches, scores the calibration and test images, and calibrates the score fusion without reading test labels. `evaluate` reads the test labels and writes the metrics. New evaluations from this source release are labelled **EXPLORATORY** because this is an AUROC-only derivative of the original preregistered code. Keep the `--exploratory` flag; it makes that status explicit.
+
+To process every category in one dataset, omit `--category bottle`, for example:
+
+```powershell
+.\hybridad.cmd prepare --experiment experiments/G_full.yaml --dataset mvtec_ad
+.\hybridad.cmd evaluate --experiment experiments/G_full.yaml --dataset mvtec_ad --exploratory
+```
+
+Use `--dataset mvtec_loco` for LOCO. Use `--dataset all` to run both datasets. Training and scoring every category can take many hours.
+
+### What takes time, and how to avoid unnecessary work
+
+The calibration calculation itself is small: it fits score normalizers and a fusion record from already saved normal-image scores. The longer step is `prepare`, which may need to train model branches and score images to create those calibration scores. Calibration-data preparation can take **about 20 minutes or longer per category** when compatible score files are not already available. DINO reconstruction training alone took about **20–57 minutes per category** in the archived runs; the full reference branches took about **87 minutes per category** on the original RTX 5070 Laptop. Timing varies with hardware, disk speed, and which outputs can be reused.
+
+The pipeline is resumable and reuses compatible saved models and score files. Keep the same checkout, configuration, dataset manifests, and `work\` folder between runs; rerunning `prepare` then skips branches whose required scores are already present. Avoid deleting `work\` or `runs_rerun\` if you want to resume. Run one GPU training job at a time, keep the PC plugged in and awake, and let the Windows DINO memory cap run as configured.
+
+Do not lower the number of training steps, shrink images, change the calibration split, or change the normalizer quantile just to make a run faster: those changes can alter results and make them incomparable to the documented experiment. The default calibration procedure in `src/hybridad/calibration.py` does not need a speed shortcut; reusing its valid cached scores is the safe time saver.
+
+### Where outputs go
+
+- New scores, predictions, metrics, and reports go under `runs_rerun\` (or the configured run folder).
+- Large trained models, score caches, and feature caches go under `work\`.
+- Calibration records are saved as `calibration.json` for each experiment/category/seed.
+- Evaluation writes `predictions.csv`, `category_metrics.csv`, `aggregate.json`, provenance, and figures.
+- The CLI prints the aggregate AUROC when evaluation finishes. Synthetic smoke results are only code checks; they are **not** benchmark results.
+
+For pixel-level localization after evaluation, run:
+
+```powershell
+.\hybridad.cmd localize --experiment experiments/G_full.yaml --dataset mvtec_ad --category bottle
+```
+
+For command options, run `.\hybridad.cmd <command> --help`, such as `.\hybridad.cmd prepare --help`.
+
+## D. Run on a different PC without the original archive
+
+1. Clone or download this repository.
+2. In PowerShell, run `powershell -NoProfile -ExecutionPolicy Bypass -File .\setup_env.ps1` to install the pinned environment. This requires Python 3.12 and internet access.
+3. Download the datasets and weights from their publishers as described in [DATA_AND_LICENSES.md](DATA_AND_LICENSES.md). Keep the expected folder names and file names. MVTec AD and LOCO AD are separately licensed datasets; Imagenette follows ImageNet access terms.
+4. Verify the tracked MVTec image files:
+
+   ```powershell
+   python .\scripts\verify_datasets.py
    ```
 
-3. Train, score and evaluate one category:
+5. Follow section C to prepare, evaluate, and inspect outputs. Trained artifacts and the historical saved scores are not included in a GitHub-only checkout; new models must be trained or separately restored.
 
-   ```shell
-   python -m hybridad.cli manifests --dataset mvtec_ad --category bottle
-   python -m hybridad.cli prepare --experiment experiments/G_full.yaml --dataset mvtec_ad --category bottle
-   python -m hybridad.cli evaluate --experiment experiments/G_full.yaml --dataset mvtec_ad --category bottle --exploratory
-   python -m hybridad.cli localize --experiment experiments/G_full.yaml --dataset mvtec_ad --category bottle
-   ```
+## Project notes
 
-The included split manifests give the exact image IDs, file digests and split roles used in the archive. The pipeline also checks the pretrained weight digests. Each new experiment writes to `runs_rerun/` and uses `work/` for large artifacts. Without archived scores and checkpoints, this workflow scores and trains from scratch. The local student–teacher penalty step needs Imagenette unless using the explicit no-penalty configuration.
-
-The historical confirmatory figures were produced by the preregistered code. This source release is the later AUROC-only derivative. New runs are exploratory and will not re-create the original preregistration or produce a new confirmation; see [the original evaluation history](docs/RESULTS.md). The historical aggregate results in this snapshot are sufficient to inspect previously reported metrics. This repository includes the normalized pre-registration record and the 142-entry test-access excerpt; full saved scores and complete audit logs remain in the local archive. `check.cmd`, report generation, and the saved-score reproduction path require that fuller archive.
-
-For X3, run `python scripts/x3_run.py prepare` and then `python scripts/x3_run.py evaluate` after placing the MVTec LOCO inputs and the required weights. X3 was designed after looking at LOCO test results and is always exploratory.
-
-## Experiments (configs in `configs/experiments/`)
-
-| Name | Branches | Fusion |
-|---|---|---|
-| A_patchcore | PatchCore | – |
-| B_local_st | local ST | – |
-| C_dino | DINO reconstruction | – |
-| D_pc_st | PatchCore + local ST | max |
-| E_pc_dino | PatchCore + DINO | max |
-| F_three | PatchCore + local ST + DINO | max |
-| **G_full** | all four scores | **max** (pre-registered) |
-| H_composition | composition only (diagnostic) | – |
-| G_full_mean / G_full_or | full model | mean / OR rule |
-| C_dino_softmax / _identity / _compact, G_full_softmax / _identity / _compact | attention and head ablations | max |
-| C_dino_pool_ref / _top0.5 / _top5, B_local_st_top1, A_patchcore_reweight | pooling / aggregation variants (no retraining) | – |
-| B_local_st_nopenalty | local ST without penalty data | – |
-| R_patchcore_published, R_dino_published | published-protocol reproductions (full train set) | – |
-
-Exploratory (configs in `configs/exploratory/`): X3_mean and X3_max, i.e. protected PatchCore + `patchcore_hr` +
-local ST + DINO reconstruction + `composition_hr`, with mean or max fusion (`docs/X3.md`).
-
-## Outputs
-New runs write the files below to `runs_rerun/<experiment>/<dataset>/seed<k>/` (exploratory: `runs_rerun/exploratory/...`):
-
-* `predictions.csv`: one row per test image, with raw and standardized branch scores, the fused score, labels,
-  per-branch status and the calibration binding hash.
-* `category_metrics.csv`: per-category AUROC with bootstrap CI, LOCO logical/structural AUROC, per-branch AUROC and
-  support counts.
-* `aggregate.json`: macro and pooled AUROC, per-branch macro AUROC and partial-run flags.
-* `figures/roc_curves.png`: ROC curves of the fused score and every branch, with their AUROCs.
-* `environment.json`, `provenance.json`, `config_used.json`.
-* `<category>/seed<k>/calibration.json`: normalizers, fusion rule, active branches (and OR offsets), bound together.
-
-Large artifacts go under `work_dir/`: `models/`, `scores/`, `cache/` and `loco_maps/`.
-
-## Compute (measured on an RTX 5070 Laptop, 8 GB)
-Current settings: DINO variants use TF32 matmuls plus cached frozen-encoder outputs (approved by the project owner).
-
-| Step (per category) | Time |
-|---|---|
-| PatchCore fit + scoring | 1–2 min |
-| Composition fit + scoring | 2–3 min |
-| Local ST, 70,000 steps | ~30 min |
-| DINO reconstruction, 5,000 iterations, batch 16 | ~57 min (1.5 it/s) |
-| **Reference branches, one category, end to end** | **~87 min** |
-
-The original faithful-fp32 DINO setting measured about 108 min per category; it's still available as `matmul_precision: fp32`.
-
-**Run rules learned the hard way:**
-* **One GPU training job at a time.** DINO training nearly fills the 8 GB card. Running two jobs spilled memory into
-  system RAM and made everything about 100× slower. CPU-only work is fine alongside.
-* **On Windows, run DINO training under a CUDA memory cap** (`scripts/run_capped.py --fraction 0.8 -- <cli args>`).
-  Without it, PyTorch's cache can grow into system memory during the hard-mining warm-up until it runs out
-  (`docs/METHODS.md`, "Run incidents").
-* **Keep the machine plugged in, with sleep disabled.** Standby freezes training.
-* Every stage is resumable: finished categories are skipped, and interrupted training resumes from checkpoints.
+- The original benchmark results and methodological limitations are in [docs/RESULTS.md](docs/RESULTS.md) and [docs/METHODS.md](docs/METHODS.md).
+- X3 was designed after viewing MVTec LOCO test results; its results are exploratory. See [docs/X3.md](docs/X3.md).
+- Dataset, weight, and third-party code sources and licenses are listed in [DATA_AND_LICENSES.md](DATA_AND_LICENSES.md).
+- See [architecture.html](architecture.html) for diagrams and [visualiser.html](visualiser.html) for the interactive historical results viewer.
