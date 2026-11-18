@@ -138,7 +138,7 @@ For command options, run `.\hybridad.cmd <command> --help`, such as `.\hybridad.
 
 1. Clone or download this repository.
 2. In PowerShell, run `powershell -NoProfile -ExecutionPolicy Bypass -File .\setup_env.ps1` to install the pinned environment. This requires Python 3.12 and internet access.
-3. Download the datasets and weights from their publishers as described in [DATA_AND_LICENSES.md](DATA_AND_LICENSES.md). Keep the expected folder names and file names. MVTec AD and LOCO AD are separately licensed datasets; Imagenette follows ImageNet access terms.
+3. Obtain MVTec AD and LOCO AD from their publishers as described in [DATA_AND_LICENSES.md](DATA_AND_LICENSES.md), or download every category archive plus the notices archive from the [MVTec dataset release](https://github.com/xdVelociraptor/improving-vanilla-patchcore-with-fusion-of-attention-dino-and-student-teacher-framework/releases/tag/mvtec-datasets-2026-11). For the release archives, extract every ZIP into `$env:USERPROFILE\\OneDrive\\Desktop\\datasets`; this recreates `MVTecAD\\` and `MVTec_LOCO\\`. Keep the included license notices and verify the downloaded files with `SHA256SUMS.txt`. MVTec AD and LOCO AD use CC BY-NC-SA 4.0; attribution, noncommercial use, and share-alike terms apply. Imagenette follows ImageNet access terms.
 4. Verify the tracked MVTec image files:
 
    ```powershell
