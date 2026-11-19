@@ -19,14 +19,24 @@ if ($Rebuild -or -not (Test-Env)) {
     if ((Test-Path $Venv) -and -not $Rebuild) {
         Write-Host "The existing .venv does not work on this machine. Re-run with -Rebuild to recreate it."; exit 1
     }
-    if (Test-Path $Venv) { Remove-Item $Venv -Recurse -Force }
-    $base = $null
-    if (Get-Command py -ErrorAction SilentlyContinue) { $base = @("py", "-3.12") } else { $base = @("python") }
-    & $base[0] $base[1..($base.Length - 1)] -m venv $Venv
+    if (Test-Path $Venv) {
+        $ResolvedVenv = (Resolve-Path -LiteralPath $Venv).Path
+        if ($ResolvedVenv -ne [IO.Path]::GetFullPath((Join-Path $Root '.venv')) -or (Get-Item -LiteralPath $Venv).Attributes -band [IO.FileAttributes]::ReparsePoint) { throw 'Refusing to remove an unexpected environment path.' }
+        Remove-Item -LiteralPath $ResolvedVenv -Recurse -Force
+    }
+    if (Get-Command py -ErrorAction SilentlyContinue) { & py -3.12 -m venv $Venv } else {
+        & python -c "import sys; assert sys.version_info[:2] == (3, 12), 'Python 3.12 is required'"
+        if ($LASTEXITCODE -ne 0) { throw 'Install Python 3.12.' }
+        & python -m venv $Venv
+    }
+    if ($LASTEXITCODE -ne 0) { throw 'Virtual environment creation failed.' }
     & $Py -m pip install --upgrade pip
+    if ($LASTEXITCODE -ne 0) { throw 'pip upgrade failed.' }
     & $Py -m pip install -r (Join-Path $Root "requirements.lock.txt") --extra-index-url https://download.pytorch.org/whl/cu128
+    if ($LASTEXITCODE -ne 0) { throw 'Dependency installation failed.' }
 }
 # (Re)register this folder's src/ as the hybridad package (also needed after moving the folder).
 & $Py -m pip install -e $Root --no-deps --no-build-isolation --no-index -q
+if ($LASTEXITCODE -ne 0) { throw 'Project installation failed.' }
 & $Py -m hybridad.cli --help
 exit $LASTEXITCODE

@@ -1,0 +1,26 @@
+{
+  "categories": {
+    "mvtec_ad/bottle": 83,
+    "mvtec_ad/cable": 150,
+    "mvtec_ad/capsule": 132,
+    "mvtec_ad/carpet": 117,
+    "mvtec_ad/grid": 78,
+    "mvtec_ad/hazelnut": 110,
+    "mvtec_ad/leather": 124,
+    "mvtec_ad/metal_nut": 115,
+    "mvtec_ad/pill": 167,
+    "mvtec_ad/screw": 160,
+    "mvtec_ad/tile": 117,
+    "mvtec_ad/toothbrush": 42,
+    "mvtec_ad/transistor": 100,
+    "mvtec_ad/wood": 79,
+    "mvtec_ad/zipper": 151,
+    "mvtec_loco/breakfast_box": 275,
+    "mvtec_loco/juice_bottle": 330,
+    "mvtec_loco/pushpins": 310,
+    "mvtec_loco/screw_bag": 341,
+    "mvtec_loco/splicing_connectors": 312
+  },
+  "bottle_macro_auroc": 1.0,
+  "note": "Reuses downloaded scores; not a fresh image-scoring or training run."
+}

@@ -2,7 +2,23 @@
 
 This project detects defects in images from the MVTec AD and MVTec LOCO AD benchmarks. Its full model combines PatchCore, a local student–teacher model, DINOv2 reconstruction, and composition features.
 
-This README is the run guide. Start with **A. See the existing results** if you only want to inspect the completed experiment, or **B. Run the saved project on the original PC** to restore the full research archive. A GitHub clone alone does not contain the datasets, model files, or Python environment. An optional saved-score cache is available from the release linked below.
+## Start here: set up from GitHub on Windows
+
+Install Python 3.12, use an NVIDIA GPU with a suitable driver, and extract this repository into a **new folder**. Allow **at least 40 GB free** for datasets, models, dependencies, and temporary downloads. Read [DATA_AND_LICENSES.md](DATA_AND_LICENSES.md) before using the research datasets and weights.
+
+Open PowerShell in that folder and run:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\setup_online.ps1
+```
+
+This installs the pinned environment, downloads and verifies the archives, restores datasets under `data/`, models and scores under `work/`, and historical results under `runs/` and `runs_rerun/`. It fetches Imagenette and two pretrained weight files from their publishers. It does not train a model. The initial downloads are over 20 GB plus Python packages, so setup is **not instant**. A normal GitHub **Download ZIP contains source only**; this setup command obtains the large assets separately.
+
+Preview the download list with `powershell -NoProfile -ExecutionPolicy Bypass -File .\setup_online.ps1 -Plan`. For selected downloads after environment setup, use `.\.venv\Scripts\python.exe scripts/download_artifacts.py --groups models scores`. Available groups: `datasets models scores outputs weights imagenette`.
+
+Completed files are preserved. If setup detects a conflicting existing file, it stops; use a fresh extraction rather than overwriting earlier experiments. A retry may download an archive again. Archives are removed from the temporary download cache after successful extraction to save disk space.
+
+The [model and research artifact release](https://github.com/xdVelociraptor/improving-vanilla-patchcore-with-fusion-of-attention-dino-and-student-teacher-framework/releases/tag/model-artifacts-2026-11) contains all original saved model files, DINOv2 weights, historical outputs, logs and extra source files. See [the coverage and verification record](docs/UPLOAD_VERIFICATION.md) for exclusions and test limits. After setup, follow section C to prepare and evaluate. You can read the historical results immediately in section A without installing anything.
 
 ## A. See the existing results
 
@@ -44,7 +60,7 @@ The original folder is not changed. The setup stops if it finds a different file
 powershell -NoProfile -ExecutionPolicy Bypass -File .\setup_local_archive.ps1 -Archive "D:\path\to\kutty dinosaur"
 ```
 
-The full archive is about 27 GB. GitHub contains the source and documentation, and the release provides the optional numerical score cache. GitHub does not host the datasets, pretrained weights, trained checkpoints, or Python environment.
+The full original archive is about 27 GB. The public releases now host MVTec datasets, saved models, scores, DINOv2 weights and research outputs. The online setup above obtains the remaining publisher inputs and rebuilds the Python environment.
 
 ## C. Run a new experiment
 
@@ -136,16 +152,7 @@ For command options, run `.\hybridad.cmd <command> --help`, such as `.\hybridad.
 
 ## D. Run on a different PC without the original archive
 
-1. Clone or download this repository.
-2. In PowerShell, run `powershell -NoProfile -ExecutionPolicy Bypass -File .\setup_env.ps1` to install the pinned environment. This requires Python 3.12 and internet access.
-3. Obtain MVTec AD and LOCO AD from their publishers as described in [DATA_AND_LICENSES.md](DATA_AND_LICENSES.md), or download every category archive plus the notices archive from the [MVTec dataset release](https://github.com/xdVelociraptor/improving-vanilla-patchcore-with-fusion-of-attention-dino-and-student-teacher-framework/releases/tag/mvtec-datasets-2026-11). For the release archives, extract every ZIP into `$env:USERPROFILE\OneDrive\Desktop\datasets`; this recreates `MVTecAD` and `MVTec_LOCO`. Keep the included license notices and verify the downloaded files with `SHA256SUMS.txt`. MVTec AD and LOCO AD use CC BY-NC-SA 4.0; attribution, noncommercial use, and share-alike terms apply. Imagenette follows ImageNet access terms.
-4. Verify the tracked MVTec image files:
-
-   ```powershell
-   python .\scripts\verify_datasets.py --ad-root "$env:USERPROFILE\OneDrive\Desktop\datasets\MVTecAD" --loco-root "$env:USERPROFILE\OneDrive\Desktop\datasets\MVTec_LOCO"
-   ```
-
-5. Follow section C to prepare, evaluate, and inspect outputs. Trained models are not included in a GitHub-only checkout and must be trained or separately restored. Historical numerical scores can be downloaded from the [Saved anomaly-score cache release](https://github.com/xdVelociraptor/improving-vanilla-patchcore-with-fusion-of-attention-dino-and-student-teacher-framework/releases/tag/score-cache-2026-11) and extracted at the repository root; check the release notes and confirm compatibility before relying on them.
+Use `setup_online.ps1` as described at the top of this README. You do not need the original Windows folder. Its default dataset locations match `configs/base.yaml`, so no machine-specific config is required in a fresh checkout. The manual input sources and licenses remain listed in [DATA_AND_LICENSES.md](DATA_AND_LICENSES.md).
 
 ## Project notes
 

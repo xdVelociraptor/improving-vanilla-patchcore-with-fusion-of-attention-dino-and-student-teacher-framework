@@ -40,6 +40,7 @@ __pycache__/
 *.tgz
 *.zip
 .env
+.artifact-downloads/
 .env.*
 !.env.example
 *.pem

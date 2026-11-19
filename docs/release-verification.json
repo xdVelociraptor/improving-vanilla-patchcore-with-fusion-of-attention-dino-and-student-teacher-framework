@@ -1,0 +1,227 @@
+[
+  {
+    "name": "mvtecad-bottle.zip",
+    "bytes": 156624938,
+    "sha256": "3b21923a3d6c02dba3378da6be006e98eba3ee765acc31d69212ade906b6aa4d"
+  },
+  {
+    "name": "mvtecad-cable.zip",
+    "bytes": 505267897,
+    "sha256": "4fcfc84eb57d15e5f8281c61589886985fd7b6bf320a22a677c46758783f3438"
+  },
+  {
+    "name": "mvtecad-capsule.zip",
+    "bytes": 404824323,
+    "sha256": "14ed1f6bb8f3744ea40f19e988e32bc5f8604d9d3437edffdbb43816c9479abc"
+  },
+  {
+    "name": "mvtecad-carpet.zip",
+    "bytes": 741015895,
+    "sha256": "3a8cad1fd88aa98ea46ab8702c5527a675e4d2e33049c4901a0fe956aa84e934"
+  },
+  {
+    "name": "mvtecad-grid.zip",
+    "bytes": 161456121,
+    "sha256": "c8c6afcb30ab44a7ffd094c83404e03e03329e57774538126b4a26d76beda35e"
+  },
+  {
+    "name": "mvtecad-hazelnut.zip",
+    "bytes": 617671131,
+    "sha256": "c5b8101651ebd36bb9dcf2ece1efc9b6c37c3611ac629bcf94dad7fd1fcb6fbb"
+  },
+  {
+    "name": "mvtecad-leather.zip",
+    "bytes": 525510777,
+    "sha256": "7c7200d8aa19dba10a15400edf7c661bd589f8090530f751815b3067a093d722"
+  },
+  {
+    "name": "mvtecad-metal_nut.zip",
+    "bytes": 165928475,
+    "sha256": "dfe4d02ea2eb5f2d2ab7ad4293d04ac9efd9d44b416dc980d15c810d5aaa789b"
+  },
+  {
+    "name": "mvtecad-pill.zip",
+    "bytes": 275162649,
+    "sha256": "4ad2c51b99b468454f87833bd3486c8b2f71a6edbf8c76bb065b7e64b1bf0d8c"
+  },
+  {
+    "name": "mvtecad-screw.zip",
+    "bytes": 196052387,
+    "sha256": "62327907affdda3995811bc41dc5a5c07366d22221a16d0e5af02acdea48c152"
+  },
+  {
+    "name": "mvtecad-tile.zip",
+    "bytes": 351797020,
+    "sha256": "023122c392babced8aaab986b44c2f7e5b4495b2db60f27cce20013406b3016d"
+  },
+  {
+    "name": "mvtecad-toothbrush.zip",
+    "bytes": 109524632,
+    "sha256": "fc2613f55c6429d5353cb511d8b2e920a79deadc1c33ee57d806632ed7f42a1b"
+  },
+  {
+    "name": "mvtecad-transistor.zip",
+    "bytes": 403250085,
+    "sha256": "c6f05391e0790adb15aed63ef33b9cddd22ab27c595f05b79662e7530ace2390"
+  },
+  {
+    "name": "mvtecad-wood.zip",
+    "bytes": 498525853,
+    "sha256": "829c543639628e1d815ba7f34ebcca98e152438d5140363bca27106226c0d18d"
+  },
+  {
+    "name": "mvtecad-zipper.zip",
+    "bytes": 159606621,
+    "sha256": "dff4bda89fb81599b34266195c93080378e15530750cb0600aa4e1d2a080278a"
+  },
+  {
+    "name": "mvtec-loco-breakfast_box.zip",
+    "bytes": 1728969763,
+    "sha256": "257b841f6dfa0707705154721ca55233d5b13250bde6ab5be6e58237fcecbcfe"
+  },
+  {
+    "name": "mvtec-loco-juice_bottle.zip",
+    "bytes": 655722429,
+    "sha256": "8367273be8360b4c8a4d5aafc022250e39da1efb55d492af96ca8526a510246f"
+  },
+  {
+    "name": "mvtec-loco-pushpins.zip",
+    "bytes": 1119731425,
+    "sha256": "f3adf4f61e9cddc5078481d1877935e2f36bb7c148ea2b43f9782186fea19249"
+  },
+  {
+    "name": "mvtec-loco-screw_bag.zip",
+    "bytes": 1103065641,
+    "sha256": "d4cfb23882a4920e2f346a0c049ca5cfa2f721098831ed032554815454fc20c0"
+  },
+  {
+    "name": "mvtec-loco-splicing_connectors.zip",
+    "bytes": 1520341568,
+    "sha256": "54512f1e584be0aab3a13274ef3fb9bcf14debe2d5ede56d7644eb312ef93bac"
+  },
+  {
+    "name": "mvtec-dataset-notices.zip",
+    "bytes": 45358,
+    "sha256": "5bb959d6486178c257d15c542c4cea70b18b334351215a1522fd056cafdd41e2"
+  },
+  {
+    "name": "models-mvtec_ad-bottle.zip",
+    "bytes": 1589363971,
+    "sha256": "c1e95fcabd016388a1ccc1cf0177813f954a4e8d3b96e67567a62f2500ca2971"
+  },
+  {
+    "name": "models-mvtec_ad-cable.zip",
+    "bytes": 314837138,
+    "sha256": "e3c39942604e04882ddadd9db48ca19421c5a13279425587bd9de0fa3c9f62c4"
+  },
+  {
+    "name": "models-mvtec_ad-capsule.zip",
+    "bytes": 313544764,
+    "sha256": "b379bb5b21d83488384458617b92bfe4b5fc52ca91290b1f56f47d43e0bb7fb8"
+  },
+  {
+    "name": "models-mvtec_ad-carpet.zip",
+    "bytes": 328482736,
+    "sha256": "da1cc34c829b1d8ccfbf3c21f0d2c900494de9e64db190949f4eb56380afbe34"
+  },
+  {
+    "name": "models-mvtec_ad-grid.zip",
+    "bytes": 324308876,
+    "sha256": "551a02d81acc730e41279cf4f8568d865485d6ba323fad8c20249ee24b7d1fb7"
+  },
+  {
+    "name": "models-mvtec_ad-hazelnut.zip",
+    "bytes": 358110436,
+    "sha256": "c714f33060df575ea615c8514bad993533596e6b79fb7d9841213f26a46bd942"
+  },
+  {
+    "name": "models-mvtec_ad-leather.zip",
+    "bytes": 319492115,
+    "sha256": "18fbaaa6a51253c93565b8c7ef77c301501d1e0922ed57cf4b8439e480de392c"
+  },
+  {
+    "name": "models-mvtec_ad-metal_nut.zip",
+    "bytes": 313864675,
+    "sha256": "f697cb92deee4f58b2e00363564f9ee7c84e6b608c794f37eb16a0d45db4d6b0"
+  },
+  {
+    "name": "models-mvtec_ad-pill.zip",
+    "bytes": 326202113,
+    "sha256": "3f3925ef4a974b5c698e051989190f43f838c446a33a7fb041555b959e30ce14"
+  },
+  {
+    "name": "models-mvtec_ad-screw.zip",
+    "bytes": 339648688,
+    "sha256": "873aec17f487bc64626a58b8b1d53b0313c0f7bbd9ca7f170a6ee482f8b6b365"
+  },
+  {
+    "name": "models-mvtec_ad-tile.zip",
+    "bytes": 315637524,
+    "sha256": "3cba784d605baf3e792d2b05cfccb0e763c36109438365e91aeeb00ee62e223d"
+  },
+  {
+    "name": "models-mvtec_ad-toothbrush.zip",
+    "bytes": 272324257,
+    "sha256": "f06260da6716bdd78527209b131750ccc9e686b473edd5a5bc93384bb43b5fee"
+  },
+  {
+    "name": "models-mvtec_ad-transistor.zip",
+    "bytes": 311917189,
+    "sha256": "51dd1f21657826d904d3b0f38b02018af76a6caeeb9fb9a4dd9befb0a0c9226e"
+  },
+  {
+    "name": "models-mvtec_ad-wood.zip",
+    "bytes": 320135197,
+    "sha256": "c230d82d641bb206e8973e4e97a167c86cc132a80c3c4e1950af3fedc8351e83"
+  },
+  {
+    "name": "models-mvtec_ad-zipper.zip",
+    "bytes": 319058060,
+    "sha256": "4a5a50f20952e6494d6848e898ab41bed56072ef4008eff278083c404aa064b3"
+  },
+  {
+    "name": "models-mvtec_loco-breakfast_box.zip",
+    "bytes": 722279293,
+    "sha256": "38f8cd89823005195dbf9cbb197b69e83e78263fba449e4a49884c9515645942"
+  },
+  {
+    "name": "models-mvtec_loco-juice_bottle.zip",
+    "bytes": 357615039,
+    "sha256": "e7de3d430b5c4bdc6374d24d9080e35df029d66fc3fe9dfd5acf581dc5f755ba"
+  },
+  {
+    "name": "models-mvtec_loco-pushpins.zip",
+    "bytes": 389206075,
+    "sha256": "2ed3d4a0ae87024e8ef5d90954ec385ac83324b56750577de0c55e8fc15047cc"
+  },
+  {
+    "name": "models-mvtec_loco-screw_bag.zip",
+    "bytes": 404251515,
+    "sha256": "c3375f5d830c8c08ab0b3061f3ffdce01d1e003f7da88c8c4c436ecd84ae4624"
+  },
+  {
+    "name": "models-mvtec_loco-splicing_connectors.zip",
+    "bytes": 365102484,
+    "sha256": "2a02dfbc4997a6b0164477f5fd3bea2ff4915950652c8027fe9d7c489477600e"
+  },
+  {
+    "name": "models-synthetic_loco-pairs.zip",
+    "bytes": 257704940,
+    "sha256": "8a18a3a8eb04deffcac7a42a9262a9c652455e918e6e820f37850fd0d45e99d8"
+  },
+  {
+    "name": "research-outputs.zip",
+    "bytes": 17975941,
+    "sha256": "c42f967cfe3bdb4f1ee4e1c5f30e918c29aced2a388a4afad05acb38e24c7df9"
+  },
+  {
+    "name": "dinov2-base-weights.zip",
+    "bytes": 346405730,
+    "sha256": "72642e43bc1a20afe4a34cf23a2ee92d5a2b64396f48225da8f374b5324c6e2b"
+  },
+  {
+    "name": "patchcore-score-cache.zip",
+    "bytes": 85516408,
+    "sha256": "0ed883798fbdfdb4405d3fd030e90e91afc60f392e7d72323db3939962d54b4d"
+  }
+]

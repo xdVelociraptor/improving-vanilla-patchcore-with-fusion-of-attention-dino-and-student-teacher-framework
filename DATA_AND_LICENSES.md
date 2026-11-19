@@ -22,3 +22,11 @@ Included third-party source:
 - MVTec LOCO AD evaluator v2.0: [BSD 3-Clause terms](third_party/mvtec_loco_ad_evaluation/LICENSE.txt) accompany the local copy.
 
 When citing the benchmarks, use the citation instructions on the MVTec pages: Bergmann et al., *The MVTec Anomaly Detection Dataset: A Comprehensive Real-World Dataset for Unsupervised Anomaly Detection* (2021), and Bergmann et al., *Beyond Dents and Scratches: Logical Constraints in Unsupervised Anomaly Detection and Localization* (2022).
+
+## Online restore and archived additions
+
+`setup_online.ps1` uses the pinned URLs and SHA-256 values in `artifact-downloads.json`. Large files reside in GitHub Releases; they are not included in the source ZIP. The [model artifact release](https://github.com/xdVelociraptor/improving-vanilla-patchcore-with-fusion-of-attention-dino-and-student-teacher-framework/releases/tag/model-artifacts-2026-11) adds all original saved models, logs and research outputs, the missing composition figure, and unmodified DINOv2 base weights with their Apache-2.0 license. The optional extra third-party source includes additional DINO variants with their own supplied licenses; the base Apache license must not be assumed to govern every variant.
+
+WideResNet weights and the EfficientAD teacher are obtained directly from their publisher URLs, rather than mirrored here. Torchvision [notes that pretrained models can have separate terms](https://docs.pytorch.org/vision/stable/models.html); the EfficientAD release has an [unresolved upstream license clarification](https://github.com/open-edge-platform/anomalib/issues/3710). Imagenette is also downloaded from Fast.ai rather than mirrored. Review the relevant publisher terms for your use. The downloader verifies the pinned original archive hashes before extraction.
+
+The original `.venv` is deliberately rebuilt from `requirements.lock.txt`, not uploaded: it is a machine-specific installed environment. Private machine paths in 85 archived text outputs were replaced by `<USER_HOME>`; the originals remain untouched. Historical logs, predictions and intermediate results do not constitute a new independent reproduction of the published metrics.
