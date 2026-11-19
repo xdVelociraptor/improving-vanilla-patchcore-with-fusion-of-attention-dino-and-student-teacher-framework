@@ -20,6 +20,8 @@ Completed files are preserved. If setup detects a conflicting existing file, it 
 
 The [model and research artifact release](https://github.com/xdVelociraptor/improving-vanilla-patchcore-with-fusion-of-attention-dino-and-student-teacher-framework/releases/tag/model-artifacts-2026-11) contains all original saved model files, DINOv2 weights, historical outputs, logs and extra source files. See [the coverage and verification record](docs/UPLOAD_VERIFICATION.md) for exclusions and test limits. After setup, follow section C to prepare and evaluate. You can read the historical results immediately in section A without installing anything.
 
+An [optional archive of the original Windows environment](docs/ENVIRONMENT_ARCHIVE.md) is available for backup/recovery. It contains all original `.venv` files, but is machine-specific and is not used by normal setup.
+
 ## A. See the existing results
 
 The repository includes the reported summary tables:

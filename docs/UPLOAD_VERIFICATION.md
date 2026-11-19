@@ -13,7 +13,7 @@ The inventory accounts for all 61,518 files in the original research folder:
 | MVTec dataset release, including masks and notices | 11,558 |
 | Imagenette train split, obtained from Fast.ai | 9,469 |
 | WideResNet and EfficientAD teacher, obtained from publishers | 2 |
-| Machine-specific `.venv`, recreated from pinned requirements | 38,386 |
+| Machine-specific `.venv`, optional environment release; normal setup rebuilds it | 38,386 |
 
 No original file is unaccounted for. This is a path/coverage audit, not a claim that every source file is unchanged: the repository contains documented code and privacy edits. All 259 original saved-model files are included across 21 ZIPs. The output supplement has 1,452 entries, including its added notice. Machine-specific home paths were sanitized in 85 text outputs. See [coverage counts](artifact-coverage.json) and [supplement file hashes](artifact-files.json).
 
@@ -41,4 +41,8 @@ The restore script then downloaded and extracted the outputs, DINOv2 weights, sa
 
 A completely fresh Windows installation, fresh GPU training, and new-image inference have not been validated in this audit. The full one-command installation was not repeated from an empty environment; runtime checks used the existing pinned environment. Python 3.12, a suitable NVIDIA driver, internet and sufficient disk space remain required. New or changed experiments can still require training and scoring; calibration-data preparation can take 20 minutes or more per category.
 
-Imagenette, WideResNet and the EfficientAD teacher are fetched from publishers rather than mirrored because redistribution terms are not established for this repository. The `.venv` is rebuilt because it contains machine-specific paths and installed dependencies. These are explicit distribution choices, not silently missing inputs. See [licenses and sources](../DATA_AND_LICENSES.md).
+Imagenette, WideResNet and the EfficientAD teacher are fetched from publishers rather than mirrored because redistribution terms are not established for this repository. The `.venv` is now also preserved in an optional [environment archive](ENVIRONMENT_ARCHIVE.md); normal setup rebuilds it because it contains machine-specific paths and installed dependencies. These are explicit distribution choices, not silently missing inputs. See [licenses and sources](../DATA_AND_LICENSES.md).
+
+## Environment archive addition, 2026-11-20
+
+Four optional ZIPs preserve all 38,386 original environment files. Every archived file was compared by SHA-256 with its original, and the archive path inventory has no omissions or duplicates. Release upload digests were verified before publication. This adds archival coverage; it does not turn the original environment into a portable installation. Redistribution permission has not been established for Imagenette or the two remaining pretrained weights, so those remain verified publisher downloads.

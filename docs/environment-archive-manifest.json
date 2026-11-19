@@ -1,0 +1,26 @@
+[
+  {
+    "asset": "windows-python312-environment-01.zip",
+    "bytes": 448379686,
+    "files": 35527,
+    "sha256": "3c576867cea45aae228ccf1310b591bab1756e44723c68ee7b9bf278d30bd764"
+  },
+  {
+    "asset": "windows-python312-environment-02.zip",
+    "bytes": 1044613925,
+    "files": 8,
+    "sha256": "005739be3c11659e7ef51503cbddec1591c167493edbd4e1cd993327c96c4903"
+  },
+  {
+    "asset": "windows-python312-environment-03.zip",
+    "bytes": 1005103546,
+    "files": 23,
+    "sha256": "2ca8a583525ade0359acac4928a5120f4b13e565a287fd98fbac04c13d3ef628"
+  },
+  {
+    "asset": "windows-python312-environment-04.zip",
+    "bytes": 704229052,
+    "files": 2828,
+    "sha256": "e34550355fd7cc94486ce660ac1c6e824c9656bf47ef1cf64947cb7015630ff4"
+  }
+]
