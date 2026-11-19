@@ -38,7 +38,7 @@ This is the quickest way to run the archived project. It uses the original resea
    .\hybridad.cmd report --out .\logs\RESULTS.generated.md
    ```
 
-The original folder is not changed. The setup stops if it finds a different file where it needs to copy one. It also stops if `runs_check\` or `logs\self_check.json` already exists, so it cannot overwrite a previous check. For a fresh attempt, use a fresh repository extraction. If the archive is stored elsewhere, open PowerShell in the extracted folder and run:
+The original folder is not changed. The setup stops if it finds a different file where it needs to copy one. It also stops if `runs_check` or `logs\self_check.json` already exists, so it cannot overwrite a previous check. For a fresh attempt, use a fresh repository extraction. If the archive is stored elsewhere, open PowerShell in the extracted folder and run:
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File .\setup_local_archive.ps1 -Archive "D:\path\to\kutty dinosaur"
@@ -66,7 +66,7 @@ If the existing `.venv` is broken or the checkout was moved to another PC, rebui
 powershell -NoProfile -ExecutionPolicy Bypass -File .\setup_env.ps1 -Rebuild
 ```
 
-Rebuilding downloads the packages listed in \`requirements.lock.txt\` and replaces only the checkout's \`.venv\` folder.
+Rebuilding downloads the packages listed in `requirements.lock.txt` and replaces only the checkout's `.venv` folder.
 
 ### Point the download at your dataset folder
 
@@ -114,14 +114,14 @@ Use `--dataset mvtec_loco` for LOCO. Use `--dataset all` to run both datasets. T
 
 The calibration calculation itself is small: it fits score normalizers and a fusion record from already saved normal-image scores. The longer step is `prepare`, which may need to train model branches and score images to create those calibration scores. Calibration-data preparation can take **about 20 minutes or longer per category** when compatible score files are not already available. DINO reconstruction training alone took about **20–57 minutes per category** in the archived runs; the full reference branches took about **87 minutes per category** on the original RTX 5070 Laptop. Timing varies with hardware, disk speed, and which outputs can be reused.
 
-The pipeline is resumable and reuses compatible saved models and score files. Keep the same checkout, configuration, dataset manifests, and `work\` folder between runs; rerunning `prepare` then skips branches whose required scores are already present. Avoid deleting `work\` or `runs_rerun\` if you want to resume. Run one GPU training job at a time and keep the PC plugged in and awake. The `scripts/run_capped.py --fraction 0.8` wrapper limits PyTorch CUDA cache growth on Windows and avoids WDDM spilling allocations into system RAM, which caused severe slowdowns in the original runs. Use it for DINO training as shown above.
+The pipeline is resumable and reuses compatible saved models and score files. Keep the same checkout, configuration, dataset manifests, and `work` folder between runs; rerunning `prepare` then skips branches whose required scores are already present. Avoid deleting `work` or `runs_rerun` if you want to resume. Run one GPU training job at a time and keep the PC plugged in and awake. The `scripts/run_capped.py --fraction 0.8` wrapper limits PyTorch CUDA cache growth on Windows and avoids WDDM spilling allocations into system RAM, which caused severe slowdowns in the original runs. Use it for DINO training as shown above.
 
 Do not lower the number of training steps, shrink images, change the calibration split, or change the normalizer quantile just to make a run faster: those changes can alter results and make them incomparable to the documented experiment. The default calibration procedure in `src/hybridad/calibration.py` does not need a speed shortcut; reusing its valid cached scores is the safe time saver.
 
 ### Where outputs go
 
-- New scores, predictions, metrics, and reports go under `runs_rerun\` (or the configured run folder).
-- Large trained models, score caches, and feature caches go under `work\`.
+- New scores, predictions, metrics, and reports go under `runs_rerun` (or the configured run folder).
+- Large trained models, score caches, and feature caches go under `work`.
 - Calibration records are saved as `calibration.json` for each experiment/category/seed.
 - Evaluation writes `predictions.csv`, `category_metrics.csv`, `aggregate.json`, provenance, and figures.
 - The CLI prints the aggregate AUROC when evaluation finishes. Synthetic smoke results are only code checks; they are **not** benchmark results.
@@ -138,7 +138,7 @@ For command options, run `.\hybridad.cmd <command> --help`, such as `.\hybridad.
 
 1. Clone or download this repository.
 2. In PowerShell, run `powershell -NoProfile -ExecutionPolicy Bypass -File .\setup_env.ps1` to install the pinned environment. This requires Python 3.12 and internet access.
-3. Obtain MVTec AD and LOCO AD from their publishers as described in [DATA_AND_LICENSES.md](DATA_AND_LICENSES.md), or download every category archive plus the notices archive from the [MVTec dataset release](https://github.com/xdVelociraptor/improving-vanilla-patchcore-with-fusion-of-attention-dino-and-student-teacher-framework/releases/tag/mvtec-datasets-2026-11). For the release archives, extract every ZIP into `$env:USERPROFILE\\OneDrive\\Desktop\\datasets`; this recreates `MVTecAD\\` and `MVTec_LOCO\\`. Keep the included license notices and verify the downloaded files with `SHA256SUMS.txt`. MVTec AD and LOCO AD use CC BY-NC-SA 4.0; attribution, noncommercial use, and share-alike terms apply. Imagenette follows ImageNet access terms.
+3. Obtain MVTec AD and LOCO AD from their publishers as described in [DATA_AND_LICENSES.md](DATA_AND_LICENSES.md), or download every category archive plus the notices archive from the [MVTec dataset release](https://github.com/xdVelociraptor/improving-vanilla-patchcore-with-fusion-of-attention-dino-and-student-teacher-framework/releases/tag/mvtec-datasets-2026-11). For the release archives, extract every ZIP into `$env:USERPROFILE\OneDrive\Desktop\datasets`; this recreates `MVTecAD\` and `MVTec_LOCO\`. Keep the included license notices and verify the downloaded files with `SHA256SUMS.txt`. MVTec AD and LOCO AD use CC BY-NC-SA 4.0; attribution, noncommercial use, and share-alike terms apply. Imagenette follows ImageNet access terms.
 4. Verify the tracked MVTec image files:
 
    ```powershell
