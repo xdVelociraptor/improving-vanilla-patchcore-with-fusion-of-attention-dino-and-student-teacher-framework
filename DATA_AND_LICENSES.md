@@ -1,5 +1,7 @@
 # Data, weights and third-party code
 
+The project's own code is released under the [MIT License](LICENSE). The third-party code, datasets and weights listed below keep their own terms.
+
 This source snapshot contains code, split metadata and historical summary results. The repository source tree does not contain dataset images. MVTec AD and MVTec LOCO AD are also available as optional category archives in the [MVTec dataset release](https://github.com/xdVelociraptor/improving-vanilla-patchcore-with-fusion-of-attention-dino-and-student-teacher-framework/releases/tag/mvtec-datasets-2026-11); retain the included notices and follow their license terms. The original publisher pages remain the authoritative sources. Weights, trained artifacts, Imagenette, and a Python environment are separate inputs.
 
 | Input | Obtain from | Where to place it |

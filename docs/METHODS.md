@@ -75,8 +75,8 @@ Papers checked for this project: PatchCore (arXiv 2106.08265 v2), EfficientAD (2
 Before this project, a separate local project evaluated extensively on the official
 MVTec AD and MVTec LOCO **test** splits, and its notes state that one of its branches "used assigned training
 anomalies". No independent real-anomaly set exists on this machine, so no result here can be confirmed on untouched
-data. This project's own test accesses are appended to `runs/TEST_ACCESS_LOG.jsonl`; the original research archive contains an excerpt
-for these experiments as `docs/TEST_ACCESS_LOG_excerpt.jsonl`.
+data. This project's own test accesses were appended to `runs/TEST_ACCESS_LOG.jsonl` in the original research archive;
+this repository includes the excerpt for these experiments as `docs/TEST_ACCESS_LOG_excerpt.jsonl`.
 
 ### Normal-only calibration
 

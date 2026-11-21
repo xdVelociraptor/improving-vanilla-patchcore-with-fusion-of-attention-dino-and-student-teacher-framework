@@ -4,7 +4,9 @@ This project detects defects in images from the MVTec AD and MVTec LOCO AD bench
 
 ## Start here: set up from GitHub on Windows
 
-Install Python 3.12, use an NVIDIA GPU with a suitable driver, and extract this repository into a **new folder**. Allow **at least 40 GB free** for datasets, models, dependencies, and temporary downloads. Read [DATA_AND_LICENSES.md](DATA_AND_LICENSES.md) before using the research datasets and weights.
+Install Python 3.12, use an NVIDIA GPU with a suitable driver, and allow **at least 40 GB free** for datasets, models, dependencies, and temporary downloads. Read [DATA_AND_LICENSES.md](DATA_AND_LICENSES.md) before using the research datasets and weights.
+
+Extract this repository into a **new, short folder**, such as `C:\pcf`, so that `setup_online.ps1` sits directly inside it. The repository name is long, and Windows' default extraction nests it inside a second folder of the same name. In a deep location such as `Downloads`, some project and Python package paths then exceed Windows' 260-character path limit, which can make the extraction or the package installation fail. Enabling Windows long-path support also avoids this.
 
 Open PowerShell in that folder and run:
 
@@ -18,7 +20,7 @@ Preview the download list with `powershell -NoProfile -ExecutionPolicy Bypass -F
 
 Completed files are preserved. If setup detects a conflicting existing file, it stops; use a fresh extraction rather than overwriting earlier experiments. A retry may download an archive again. Archives are removed from the temporary download cache after successful extraction to save disk space.
 
-The [model and research artifact release](https://github.com/xdVelociraptor/improving-vanilla-patchcore-with-fusion-of-attention-dino-and-student-teacher-framework/releases/tag/model-artifacts-2026-11) contains all original saved model files, DINOv2 weights, historical outputs, logs and extra source files. See [the coverage and verification record](docs/UPLOAD_VERIFICATION.md) for exclusions and test limits. After setup, follow section C to prepare and evaluate. You can read the historical results immediately in section A without installing anything.
+The [model and research artifact release](https://github.com/xdVelociraptor/improving-vanilla-patchcore-with-fusion-of-attention-dino-and-student-teacher-framework/releases/tag/model-artifacts-2026-11) contains all original saved model files, DINOv2 weights, historical outputs, logs and extra source files. See [the coverage and verification record](docs/UPLOAD_VERIFICATION.md) for exclusions and test limits. After setup, follow section B to prepare and evaluate. You can read the historical results immediately in section A without installing anything.
 
 An [optional archive of the original Windows environment](docs/ENVIRONMENT_ARCHIVE.md) is available for backup/recovery. It contains all original `.venv` files, but is machine-specific and is not used by normal setup.
 
@@ -40,37 +42,12 @@ Read [the detailed results and caveats](docs/RESULTS.md). To download the option
 
 Open `logs\RESULTS.generated.md` to see the report. This reads saved scores; it does not train a model or evaluate new images. Using `--out` keeps the checked-in `docs/RESULTS.md` intact.
 
-## B. Run the saved project on the original Windows PC
-
-This is the quickest way to run the archived project. It uses the original research folder already on the PC and restores it into a separate checkout.
-
-**On the original PC, this restore has already been done:** use the separate checkout in `Documents\Codex\patchcore-run`. Do not copy the archive again unless you are setting up a different checkout.
-
-1. Download the repository ZIP from GitHub and extract it to a new folder. Do not extract it over the original `kutty dinosaur` folder.
-2. Make sure the original folder is at `%USERPROFILE%\OneDrive\Desktop\kutty dinosaur` and that the C: drive has about **29 GB free** (the copy is about 27 GB, plus 2 GB spare).
-3. Double-click `setup_local_archive.cmd` in the extracted repository and let it finish. It copies the datasets, pretrained weights, trained models, saved scores, results, and Python environment, then runs the quick check. The copy can take several minutes.
-4. When it reports `ALL CHECKS PASSED`, open PowerShell in the extracted repository folder and run:
-
-   ```powershell
-   .\hybridad.cmd --help
-   .\hybridad.cmd report --out .\logs\RESULTS.generated.md
-   ```
-
-The original folder is not changed. The setup stops if it finds a different file where it needs to copy one. It also stops if `runs_check` or `logs\self_check.json` already exists, so it cannot overwrite a previous check. For a fresh attempt, use a fresh repository extraction. If the archive is stored elsewhere, open PowerShell in the extracted folder and run:
-
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\setup_local_archive.ps1 -Archive "D:\path\to\kutty dinosaur"
-```
-
-The full original archive is about 27 GB. The public releases now host MVTec datasets, saved models, scores, DINOv2 weights and research outputs. The online setup above obtains the remaining publisher inputs and rebuilds the Python environment.
-
-## C. Run a new experiment
+## B. Run a new experiment
 
 ### Requirements and inputs
 
 - Windows and Python 3.12 are the documented environment. The original tested machine used Python 3.12.10, PyTorch with CUDA 12.8, and an NVIDIA RTX 5070 Laptop GPU with 8 GB VRAM.
-- You need the original MVTec AD and/or MVTec LOCO AD images, pretrained model weights, and Imagenette for the local student–teacher penalty branch. Download these from their publishers and put them in the locations in [DATA_AND_LICENSES.md](DATA_AND_LICENSES.md). Review the dataset terms before using or redistributing the files.
-- If you restored the original archive using section B, these inputs and the original `.venv` are already in the checkout.
+- `setup_online.ps1` already places the datasets, pretrained weights, Imagenette, trained models and saved scores where the pipeline expects them. Without it, download these inputs from their publishers into the locations listed in [DATA_AND_LICENSES.md](DATA_AND_LICENSES.md). Review the dataset terms before using or redistributing the files.
 
 To rebuild the pinned CUDA environment on Windows if needed:
 
@@ -86,26 +63,9 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\setup_env.ps1 -Rebuild
 
 Rebuilding downloads the packages listed in `requirements.lock.txt` and replaces only the checkout's `.venv` folder.
 
-### Point the download at your dataset folder
+### Datasets stored somewhere else
 
-A GitHub source download does not include the benchmark images. On this PC, the datasets are in `%USERPROFILE%\OneDrive\Desktop\datasets`, with `MVTecAD` and `MVTec_LOCO` inside. Create the ignored, machine-local config once from PowerShell in the repository folder:
-
-```powershell
-if (Test-Path .\configs\local.yaml) { throw "configs/local.yaml already exists; preserve it and check its dataset paths before continuing." }
-$datasetRoot = (Join-Path $env:USERPROFILE 'OneDrive\Desktop\datasets').Replace('\', '/')
-if (-not (Test-Path (Join-Path $env:USERPROFILE 'OneDrive\Desktop\datasets\MVTecAD')) -or
-    -not (Test-Path (Join-Path $env:USERPROFILE 'OneDrive\Desktop\datasets\MVTec_LOCO'))) {
-    throw "Expected MVTecAD and MVTec_LOCO folders under $env:USERPROFILE\OneDrive\Desktop\datasets"
-}
-@"
-paths:
-  datasets:
-    mvtec_ad: "$datasetRoot/MVTecAD"
-    mvtec_loco: "$datasetRoot/MVTec_LOCO"
-"@ | Set-Content -LiteralPath .\configs\local.yaml -Encoding utf8
-```
-
-This writes `configs/local.yaml`, which is ignored by Git and stays on your PC. It does not copy or upload the images. The dataset paths are used by `hybridad` commands, including `prepare`.
+Only needed if your datasets are not under `data/`; the online setup already puts them there. Copy `configs/local.example.yaml` to `configs/local.yaml` and set the two dataset paths to your folders. Remove the `work_dir` line unless you want models and caches elsewhere: with it, the pipeline looks for models and scores in that folder instead of the restored `work/`, and would train and score everything again. `configs/local.yaml` is ignored by Git and stays on your PC.
 
 ### Prepare and evaluate one category
 
@@ -152,7 +112,7 @@ For pixel-level localization after evaluation, run:
 
 For command options, run `.\hybridad.cmd <command> --help`, such as `.\hybridad.cmd prepare --help`.
 
-## D. Run on a different PC without the original archive
+## C. Run on another PC
 
 Use `setup_online.ps1` as described at the top of this README. You do not need the original Windows folder. Its default dataset locations match `configs/base.yaml`, so no machine-specific config is required in a fresh checkout. The manual input sources and licenses remain listed in [DATA_AND_LICENSES.md](DATA_AND_LICENSES.md).
 
@@ -160,5 +120,6 @@ Use `setup_online.ps1` as described at the top of this README. You do not need t
 
 - The original benchmark results and methodological limitations are in [docs/RESULTS.md](docs/RESULTS.md) and [docs/METHODS.md](docs/METHODS.md).
 - X3 was designed after viewing MVTec LOCO test results; its results are exploratory. See [docs/X3.md](docs/X3.md).
-- Dataset, weight, and third-party code sources and licenses are listed in [DATA_AND_LICENSES.md](DATA_AND_LICENSES.md).
+- The code in this repository is released under the [MIT License](LICENSE). Third-party code under `third_party/` keeps its own licenses, and the datasets keep their CC BY-NC-SA 4.0 terms; sources and licenses are listed in [DATA_AND_LICENSES.md](DATA_AND_LICENSES.md).
+- Notes for restoring the project on the original research PC from its local archive are in [docs/ORIGINAL_PC.md](docs/ORIGINAL_PC.md).
 - See [architecture.html](architecture.html) for diagrams and [visualiser.html](visualiser.html) for the interactive historical results viewer.
